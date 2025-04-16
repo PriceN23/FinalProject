@@ -8,7 +8,7 @@ private:
 public:
 	audio_book(const std::string& title,
 		const std::string& creator,
-		int year, 
+		int year,
 		int duration,
 		bool rating);
 

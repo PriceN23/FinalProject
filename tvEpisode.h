@@ -12,9 +12,9 @@ public:
 	tv_episode(const std::string& title,
 		const std::string& show_title,
 		const std::string& creator,
-		int year, 
+		int year,
 		int season_number,
-		int episode_number, 
+		int episode_number,
 		int duration,
 		bool rating);
 

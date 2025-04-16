@@ -10,12 +10,12 @@ public:
 	track(const std::string& title,
 		const std::string& creator, 
 		const std::string& album,
-		int year, 
+		int year,
 		int duraiton,
 		double rating);
 
 	std::string get_album() const;
 	double get_rating() const;
 
-	void print() const override;
+	//void print() const override;
 };
