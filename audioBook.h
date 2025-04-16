@@ -14,5 +14,5 @@ public:
 
 	bool get_rating() const;
 
-	void print() const override;
+	//void print() const override;
 };

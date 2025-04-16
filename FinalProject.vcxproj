@@ -133,6 +133,7 @@
     <ClInclude Include="tvEpisode.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="audioBook.cpp" />
     <ClCompile Include="data.cpp" />
     <ClCompile Include="track.cpp" />
   </ItemGroup>

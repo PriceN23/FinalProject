@@ -2,9 +2,8 @@
 
 track::track(const std::string& title,
 	const std::string& creator,
-	const std::string& album,
-	int year, int duraiton,
-	double rating) 
+	const std::string& album, int year, 
+	int duraiton, double rating) 
 	: data(title, creator, year, duration) {
 
 	if (album.length() > 0) {
@@ -18,7 +17,7 @@ track::track(const std::string& title,
 		this->rating = rating;
 	}
 	else {
-		throw std::exception("Rating can not be empty");
+		throw std::exception("Track rating must be decimal between 0 and 5 (inclusive)");
 	}
 }
 
