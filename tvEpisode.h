@@ -4,8 +4,8 @@
 class tv_episode : public data {
 private:
 	std::string show_title;
-	int season_number;
-	int episode_number;
+	int season_num;
+	int episode_num;
 	int rating; //whole numbers from 1-10
 
 public:
@@ -13,15 +13,15 @@ public:
 		const std::string& show_title,
 		const std::string& creator,
 		int year,
-		int season_number,
-		int episode_number,
+		int season_num,
+		int episode_num,
 		int duration,
-		bool rating);
+		int rating);
 
 	std::string get_show_title() const;
-	int get_season_number() const;
-	int get_episode_number() const;
+	int get_season_num() const;
+	int get_episode_num() const;
 	int get_rating() const;
 
-	void print() const override;
+	//void print() const override;
 };

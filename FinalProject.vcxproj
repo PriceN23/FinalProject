@@ -136,6 +136,7 @@
     <ClCompile Include="audioBook.cpp" />
     <ClCompile Include="data.cpp" />
     <ClCompile Include="track.cpp" />
+    <ClCompile Include="tvEpisode.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

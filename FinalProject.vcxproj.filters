@@ -38,5 +38,8 @@
     <ClCompile Include="audioBook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tvEpisode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
