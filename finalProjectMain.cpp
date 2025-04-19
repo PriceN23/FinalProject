@@ -12,7 +12,6 @@ Stretch Goals:
 2. Implemented allowing the user to remove an entry from the database. Also updates the original databse file. 
 3. 
 */
-
 #include "track.h"
 #include "audioBook.h"
 #include "tvEpisode.h"
@@ -139,9 +138,10 @@ std::vector<data*> fill_database(const std::string& path, int length) {
 	return database;
 }
 
-void print(const std::vector<data*>& database, int length) {
+void print_database(const std::vector<data*>& database, int length) {
+	std::cout << "Database: " << std::endl;
+
 	for (int i = 0; i < length; i++) {
-		std::cout << i + 1 << ": ";
 		if (track* t = dynamic_cast<track*>(database[i])) {
 			t->print();
 		}
@@ -152,6 +152,40 @@ void print(const std::vector<data*>& database, int length) {
 			e->print();
 		}
 	}
+	std::cout << std::endl;
+}
+
+void print_tracks(const std::vector<data*>& database, int length) {
+	std::cout << "Tracks: " << std::endl;
+
+	for (int i = 0; i < length; i++) {
+		if (track* t = dynamic_cast<track*>(database[i])) {
+			t->print();
+		}
+	}
+	std::cout << std::endl;
+}
+
+void print_audio_books(const std::vector<data*>& database, int length) {
+	std::cout << "Audio Books: " << std::endl;
+
+	for (int i = 0; i < length; i++) {
+		if (audio_book* b = dynamic_cast<audio_book*>(database[i])) {
+			b->print();
+		}
+	}
+	std::cout << std::endl;
+}
+
+void print_tv_episodes(const std::vector<data*>& database, int length) {
+	std::cout << "TV Episodes: " << std::endl;
+
+	for (int i = 0; i < length; i++) {
+		if (tv_episode* e = dynamic_cast<tv_episode*>(database[i])) {
+			e->print();
+		}
+	}
+	std::cout << std::endl;
 }
 
 int main() {
@@ -161,7 +195,10 @@ int main() {
 
 	std::vector<data*> database = fill_database(path, num_lines);;
 
-	print(database, num_lines);
+	print_database(database, num_lines);
+	print_tracks(database, num_lines);
+	print_audio_books(database, num_lines);
+	print_tv_episodes(database, num_lines);
 
 	for (int i = 0; i < num_lines; i++) {
 		delete database[i];

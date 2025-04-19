@@ -18,9 +18,9 @@ double audio_book::get_rating() const {
 }
 
 void audio_book::print() const {
-	std::cout << "Title: " << title
-		<< " Creator: " << creator
-		<< " Year: " << year
-		<< " Duration: " << duration
-		<< " Rating: " << rating << std::endl;
+	std::cout << title
+		<< " [" << creator
+		<< ", " << year
+		<< "] (" << duration
+		<< " min) " << rating << std::endl;
 }
