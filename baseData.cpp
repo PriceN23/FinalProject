@@ -1,4 +1,4 @@
-#include "data.h"
+#include "baseData.h"
 
 base_data::base_data(const std::string& title, 
 	const std::string& creator, 
