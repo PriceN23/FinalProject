@@ -128,15 +128,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="audioBook.h" />
+    <ClInclude Include="baseData.h" />
     <ClInclude Include="data.h" />
     <ClInclude Include="track.h" />
     <ClInclude Include="tvEpisode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="audioBook.cpp" />
-    <ClCompile Include="data.cpp" />
+    <ClCompile Include="baseData.cpp" />
+    <ClCompile Include="finalProjectMain.cpp" />
     <ClCompile Include="track.cpp" />
     <ClCompile Include="tvEpisode.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\database.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

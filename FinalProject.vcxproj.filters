@@ -18,7 +18,7 @@
     <ClInclude Include="track.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="data.h">
+    <ClInclude Include="baseData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="audioBook.h">
@@ -27,9 +27,12 @@
     <ClInclude Include="tvEpisode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="data.cpp">
+    <ClCompile Include="baseData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="track.cpp">
@@ -41,5 +44,11 @@
     <ClCompile Include="tvEpisode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="finalProjectMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\database.csv" />
   </ItemGroup>
 </Project>

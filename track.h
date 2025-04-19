@@ -1,7 +1,7 @@
 #pragma once
-#include "data.h"
+#include "baseData.h"
 
-class track : public data {
+class track : public base_data {
 private:
 	std::string album;
 	double rating; //decimal values from 0-5

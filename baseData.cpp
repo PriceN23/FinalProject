@@ -1,6 +1,6 @@
 #include "data.h"
 
-data::data(const std::string& title, 
+base_data::base_data(const std::string& title, 
 	const std::string& creator, 
 	int year, double duration) {
 
@@ -33,19 +33,19 @@ data::data(const std::string& title,
 	}
 }
 
-std::string data::get_title() const {
+std::string base_data::get_title() const {
 	return title;
 }
 
-std::string data::get_creator() const {
+std::string base_data::get_creator() const {
 	return creator;
 }
 
-int data::get_year() const {
+int base_data::get_year() const {
 	return year;
 }
 
-double data::get_duration() const {
+double base_data::get_duration() const {
 	return duration;
 }
 

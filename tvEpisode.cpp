@@ -5,7 +5,7 @@ tv_episode::tv_episode(const std::string& title,
 	const std::string& creator, int year, 
 	int season_num, int episode_num,
 	double duration, int rating)
-	: data(title, creator, year, duration) {\
+	: base_data(title, creator, year, duration) {
 
 	if (show_title.length() > 0) {
 		this->show_title = show_title;

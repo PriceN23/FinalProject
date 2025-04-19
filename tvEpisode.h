@@ -1,7 +1,7 @@
 #pragma once
-#include "data.h"
+#include "baseData.h"
 
-class tv_episode : public data {
+class tv_episode : public base_data {
 private:
 	std::string show_title;
 	int season_num;

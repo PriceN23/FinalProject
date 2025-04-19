@@ -1,9 +1,9 @@
 #pragma once
-#include "data.h"
+#include "baseData.h"
 
-class audio_book : public data {
+class audio_book : public base_data {
 private:
-	bool rating; //tumb up/thumb down
+	bool rating; //tumb up/thumb down, need to ask Brian if this is yes/no or quantity of like/dislikes
 
 public:
 	audio_book(const std::string& title,
