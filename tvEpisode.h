@@ -23,5 +23,5 @@ public:
 	int get_episode_num() const;
 	int get_rating() const;
 
-	//void print() const override;
+	void print() const override;
 };

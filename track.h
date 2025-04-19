@@ -17,5 +17,5 @@ public:
 	std::string get_album() const;
 	double get_rating() const;
 
-	//void print() const override;
+	void print() const override;
 };

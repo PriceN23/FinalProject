@@ -3,16 +3,16 @@
 
 class audio_book : public base_data {
 private:
-	bool rating; //tumb up/thumb down, need to ask Brian if this is yes/no or quantity of like/dislikes
+	double rating; //tumb up/thumb down, need to ask Brian if this is yes/no or quantity of like/dislikes
 
 public:
 	audio_book(const std::string& title,
 		const std::string& creator,
 		int year,
 		double duration,
-		bool rating);
+		double rating);
 
-	bool get_rating() const;
+	double get_rating() const;
 
-	//void print() const override;
+	void print() const override;
 };

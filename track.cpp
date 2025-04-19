@@ -3,9 +3,9 @@
 track::track(const std::string& title,
 	const std::string& creator,
 	const std::string& album, int year, 
-	double duraiton, double rating)
+	double duration, double rating) 
 	: base_data(title, creator, year, duration) {
-
+	//: base_data(title, creator, year, duration) 
 	if (album.length() > 0) {
 		this->album = album;
 	}
@@ -27,4 +27,14 @@ std::string track::get_album() const {
 
 double track::get_rating() const {
 	return rating;
+}
+
+void track::print() const {
+	std::cout << "Title: " << title
+		<< " Creator: " << creator
+		<< " Album: " << album
+		<< " Year: " << year
+		<< " Duration: " << duration
+		<< " Rating: " << rating
+		<< "/5" << std::endl;
 }

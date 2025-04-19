@@ -8,7 +8,7 @@ protected:
 	std::string title;
 	std::string creator;
 	int year;
-	double duration; //minutes
+	double duration;
 
 	base_data(const std::string& title,
 		const std::string& creator,
