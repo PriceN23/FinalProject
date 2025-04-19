@@ -2,7 +2,7 @@
 
 audio_book::audio_book(const std::string& title,
 	const std::string& creator, int year, 
-	int duration, bool rating) 
+	double duration, bool rating)
 	: data(title, creator, year, duration) {
 
 	if (rating == true || rating == false) {

@@ -15,7 +15,7 @@ public:
 		int year,
 		int season_num,
 		int episode_num,
-		int duration,
+		double duration,
 		int rating);
 
 	std::string get_show_title() const;

@@ -9,7 +9,7 @@ public:
 	audio_book(const std::string& title,
 		const std::string& creator,
 		int year,
-		int duration,
+		double duration,
 		bool rating);
 
 	bool get_rating() const;

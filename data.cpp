@@ -2,7 +2,7 @@
 
 data::data(const std::string& title, 
 	const std::string& creator, 
-	int year, int duration) {
+	int year, double duration) {
 
 	if (title.length() > 0) {
 		this->title = title;
@@ -25,11 +25,11 @@ data::data(const std::string& title,
 		throw std::exception("Year must be between 1800 and 2025 (inlcusive)");
 	}
 
-	if (duration >= 0 && duration <= 1440) {
+	if (duration >= 0.0 && duration <= 10000.0) {
 		this->duration = duration;
 	}
 	else {
-		throw std::exception("Duration can not be negative or greater than 1440 minutes (24 hours)");
+		throw std::exception("Duration can not be negative or greater than 10000 minutes");
 	}
 }
 
@@ -45,7 +45,7 @@ int data::get_year() const {
 	return year;
 }
 
-int data::get_duration() const {
+double data::get_duration() const {
 	return duration;
 }
 

@@ -3,7 +3,7 @@
 track::track(const std::string& title,
 	const std::string& creator,
 	const std::string& album, int year, 
-	int duraiton, double rating) 
+	double duraiton, double rating)
 	: data(title, creator, year, duration) {
 
 	if (album.length() > 0) {

@@ -11,7 +11,7 @@ public:
 		const std::string& creator, 
 		const std::string& album,
 		int year,
-		int duraiton,
+		double duraiton,
 		double rating);
 
 	std::string get_album() const;
