@@ -19,7 +19,7 @@ Stretch Goals:
 #include <algorithm> //we can use this for std::swap in the sort functions
 #include <vector>
 
-int get_line_counts(const std::string& path) {
+int get_line_count(const std::string& path) {
 	std::ifstream stream;
 	stream.open(path);
 
@@ -139,7 +139,8 @@ std::vector<data*> fill_database(const std::string& path, int length) {
 }
 
 void print_database(const std::vector<data*>& database, int length) {
-	std::cout << "Database: " << std::endl;
+	std::cout << std::endl 
+		<< "Database: " << std::endl;
 
 	for (int i = 0; i < length; i++) {
 		if (track* t = dynamic_cast<track*>(database[i])) {
@@ -156,7 +157,8 @@ void print_database(const std::vector<data*>& database, int length) {
 }
 
 void print_tracks(const std::vector<data*>& database, int length) {
-	std::cout << "Tracks: " << std::endl;
+	std::cout << std::endl 
+		<< "Tracks: " << std::endl;
 
 	for (int i = 0; i < length; i++) {
 		if (track* t = dynamic_cast<track*>(database[i])) {
@@ -167,7 +169,8 @@ void print_tracks(const std::vector<data*>& database, int length) {
 }
 
 void print_audio_books(const std::vector<data*>& database, int length) {
-	std::cout << "Audio Books: " << std::endl;
+	std::cout << std::endl 
+		<< "Audio Books: " << std::endl;
 
 	for (int i = 0; i < length; i++) {
 		if (audio_book* b = dynamic_cast<audio_book*>(database[i])) {
@@ -178,7 +181,8 @@ void print_audio_books(const std::vector<data*>& database, int length) {
 }
 
 void print_tv_episodes(const std::vector<data*>& database, int length) {
-	std::cout << "TV Episodes: " << std::endl;
+	std::cout << std::endl 
+		<< "TV Episodes: " << std::endl;
 
 	for (int i = 0; i < length; i++) {
 		if (tv_episode* e = dynamic_cast<tv_episode*>(database[i])) {
@@ -188,19 +192,203 @@ void print_tv_episodes(const std::vector<data*>& database, int length) {
 	std::cout << std::endl;
 }
 
+void invalid_input() {
+	std::cout << "Invalid entry, please make another seleciton: ";
+}
+
+bool verify_integer(const std::string& input) {
+	for (int i = 0; i < input.length(); i++) {
+		if (!std::isdigit(input[i])) {
+			return false;
+		}
+	}
+	return true;
+}
+
+bool within_range(const std::string& input, int range) {
+	if (input >= "0" && std::stoi(input) <= range) {
+		return true;
+	}
+	return false;
+}
+
+int get_input(int range) {
+	int selected = 0;
+	bool end = false;
+	std::string input;
+
+	do {
+		std::getline(std::cin, input);
+
+		if (input.length() > 0 && verify_integer(input) == true && within_range(input, range) == true) {
+			selected = std::stoi(input);
+			end = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (end == false);
+
+	return selected;
+}
+
+int print_menu_prompt() {
+	std::cout << std::endl
+		<< "Print Menu" << std::endl
+		<< "1 Print all entries in database" << std::endl
+		<< "2 Print all Tracks in database" << std::endl
+		<< "3 Print all Audio Books in database" << std::endl
+		<< "4 Print all TV Episodes in database" << std::endl
+		<< "5 Print all entries with a given creator" << std::endl
+		<< "6 Print all entries released on or after a given year" << std::endl
+		<< "0 Return to previous menu" << std::endl;
+
+	std::cout << "Make a selection: ";
+
+	int selected = -1;
+	selected = get_input(6);
+
+	return selected;
+}
+
+void print_menu(const std::vector<data*>& database, int length) {
+	int selected = 0;
+	selected = print_menu_prompt();
+
+	switch (selected) {
+	case 0:
+		//return 
+		break;
+	case 1:
+		print_database(database, length);
+		break;
+	case 2:
+		print_tracks(database, length);
+		break;
+	case 3:
+		print_audio_books(database, length);
+		break;
+	case 4:
+		print_tv_episodes(database, length);
+		break;
+	case 5:
+		//print_by_creator(database, length);
+		break;
+	case 6:
+		//print_by_year(database, length);
+		break;
+	default:
+		break;
+	}
+}
+
+int sort_menu_prompt() {
+	std::cout << std::endl
+		<< "Sort Menu" << std::endl
+		<< "1 Sort all entries by their rating in ascending order" << std::endl
+		<< "2 Sort all entries by their rating in descending order" << std::endl
+		<< "3 Sort all entries in ascending order based on their year" << std::endl
+		<< "4 Sort all entries in descending order based on their year" << std::endl
+		<< "5 Sort all entries by the lexicographical order of their title" << std::endl
+		<< "0 Return to previous menu" << std::endl;
+
+	std::cout << "Make a selection: ";
+
+	int selected = -1;
+	selected = get_input(5);
+
+	return selected;
+}
+
+void sort_menu(const std::vector<data*>& database, int length) {
+	int selected = 0;
+	selected = sort_menu_prompt();
+
+	switch (selected) {
+	case 1:
+		//Optional: Sort all entries by their rating in ascending order
+		break;
+	case 2:
+		//Needed: Sort all entries by their rating in descending order
+		break;
+	case 3:
+		//Needed: Sort all entries in ascending order based on their year
+		break;
+	case 4:
+		//Optional: Sort all entries in descending order based on their year
+		break;
+	case 5:
+		//Needed: Sort all entries by the lexicographical order of their title
+		break;
+	case 0:
+		//return 
+		break;
+	default:
+		break;
+	}
+}
+
+int menu_prompt() {
+	std::cout << std::endl
+		<< "Main Menu" << std::endl
+		<< "1 Print options" << std::endl
+		<< "2 Sort options" << std::endl
+		<< "3 Add new entry to database" << std::endl
+		<< "4 Remove an entry from database" << std::endl
+		<< "5 Yet to be added Stretch Goal" << std::endl
+		<< "0 Quit" << std::endl;
+
+	std::cout << "Make a selection: ";
+
+	int selected = -1;
+	selected = get_input(5);
+
+	return selected;
+}
+
+bool menu(const std::vector<data*>& database, int length) {
+	int selected = 0;
+	selected = menu_prompt();
+
+	switch (selected) {
+	case 1:
+		print_menu(database, length);
+		break;
+	case 2:
+		sort_menu(database, length);
+		break;
+	case 3:
+		//add_entry(database, length);
+		break;
+	case 4:
+		//remove_entry(database, length);
+		break;
+	case 5:
+		//Yet to be added Stretch Goal
+		break;
+	case 0:
+		return true;
+		break;
+	default:
+		break;
+	}
+	return false;
+}
+
 int main() {
 	std::string path = "Data\\database.csv";
 	
-	int num_lines = get_line_counts(path) - 3;
+	int length = get_line_count(path) - 3;
 
-	std::vector<data*> database = fill_database(path, num_lines);;
+	std::vector<data*> database = fill_database(path, length);
+	
+	bool quit = false;
 
-	print_database(database, num_lines);
-	print_tracks(database, num_lines);
-	print_audio_books(database, num_lines);
-	print_tv_episodes(database, num_lines);
+	do {
+		quit = menu(database, length);
+	} while (quit == false);
 
-	for (int i = 0; i < num_lines; i++) {
+	for (int i = 0; i < length; i++) {
 		delete database[i];
 	}
 
