@@ -1,16 +1,16 @@
 /*
 Final Project: Default Proposal
-CompSci 222-01 04/18/2025
+CompSci 222-01 05/01/2025
 Troy Poniewaz & Nicholas Price
 
 Files: 
 	finalProjectMain.cpp, data.h, data.cpp, track.h, track.cpp, 
-	audioBook.h, audioBook.cpp, tvEpisode.h, tvEpisode.cpp
+	audioBook.h, audioBook.cpp, tvEpisode.h, tvEpisode.cpp, Data\database.csv
 
 Stretch Goals:
-1. Implemented allowing the user to add a new entry to the database. Also updates the orignal database file.
-2. Implemented allowing the user to remove an entry from the database. Also updates the original databse file. 
-3. 
+1. (Inprogress) Implemented allowing the user to add a new entry to the database. Also updates the orignal database file.
+2. (Inprogress) Implemented allowing the user to remove an entry from the database. Also updates the original databse file.
+3. (Inprogress)
 */
 #include "track.h"
 #include "audioBook.h"
