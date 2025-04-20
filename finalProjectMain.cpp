@@ -196,6 +196,10 @@ void invalid_input() {
 	std::cout << "Invalid entry, please make another seleciton: ";
 }
 
+void sort_successful() {
+	std::cout << std::endl << "Sort successful" << std::endl;
+}
+
 bool verify_integer(const std::string& input) {
 	for (int i = 0; i < input.length(); i++) {
 		if (!std::isdigit(input[i])) {
@@ -232,6 +236,12 @@ int get_input(int range) {
 	return selected;
 }
 
+void back_to_menu() {
+	std::cout << "Press 0 to return back to menu: ";
+	get_input(0);
+	std::cout << std::endl;
+}
+
 int print_menu_prompt() {
 	std::cout << std::endl
 		<< "Print Menu" << std::endl
@@ -261,21 +271,27 @@ void print_menu(const std::vector<data*>& database, int length) {
 		break;
 	case 1:
 		print_database(database, length);
+		back_to_menu();
 		break;
 	case 2:
 		print_tracks(database, length);
+		back_to_menu();
 		break;
 	case 3:
 		print_audio_books(database, length);
+		back_to_menu();
 		break;
 	case 4:
 		print_tv_episodes(database, length);
+		back_to_menu();
 		break;
 	case 5:
 		//print_by_creator(database, length);
+		back_to_menu();
 		break;
 	case 6:
 		//print_by_year(database, length);
+		back_to_menu();
 		break;
 	default:
 		break;
@@ -305,23 +321,33 @@ void sort_menu(const std::vector<data*>& database, int length) {
 	selected = sort_menu_prompt();
 
 	switch (selected) {
+	case 0:
+		//return 
+		break;
 	case 1:
 		//Optional: Sort all entries by their rating in ascending order
+		sort_successful();
+		back_to_menu();
 		break;
 	case 2:
 		//Needed: Sort all entries by their rating in descending order
+		sort_successful();
+		back_to_menu();
 		break;
 	case 3:
 		//Needed: Sort all entries in ascending order based on their year
+		sort_successful();
+		back_to_menu();
 		break;
 	case 4:
 		//Optional: Sort all entries in descending order based on their year
+		sort_successful();
+		back_to_menu();
 		break;
 	case 5:
 		//Needed: Sort all entries by the lexicographical order of their title
-		break;
-	case 0:
-		//return 
+		sort_successful();
+		back_to_menu();
 		break;
 	default:
 		break;
@@ -359,12 +385,15 @@ bool menu(const std::vector<data*>& database, int length) {
 		break;
 	case 3:
 		//add_entry(database, length);
+		back_to_menu();
 		break;
 	case 4:
 		//remove_entry(database, length);
+		back_to_menu();
 		break;
 	case 5:
 		//Yet to be added Stretch Goal
+		back_to_menu();
 		break;
 	case 0:
 		return true;
