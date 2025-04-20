@@ -196,12 +196,6 @@ void invalid_input() {
 	std::cout << "Invalid entry, please make another seleciton: ";
 }
 
-void sort_successful() {
-	std::cout << std::endl << "Sort successful" << std::endl;
-}
-
-//This would be a good spot to build the sorting functions.
-
 bool verify_integer(const std::string& input) {
 	for (int i = 0; i < input.length(); i++) {
 		if (!std::isdigit(input[i])) {
@@ -237,6 +231,97 @@ int get_input(int range) {
 
 	return selected;
 }
+
+std::string get_input() {
+	std::string input = "Unknown";
+	bool end = false;
+
+	do {
+		std::getline(std::cin, input);
+
+		if (input.length() > 0) {
+			end = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (end == false);
+
+	return input;
+}
+
+void print_by_creator(const std::vector<data*>& database, int length) {
+	std::string creator = "Unknown";
+	int counter = 0;
+
+	std::cout << std::endl << "Note: Search is case and space sensitive" << std::endl;
+	std::cout << "Enter creator: ";
+
+	creator = get_input();
+	std::cout << std::endl;
+
+	for (int i = 0; i < length; i++) {
+		if (base_data* d = dynamic_cast<base_data*>(database[i])) {
+			if (d->get_creator() == creator) {
+				if (track* t = dynamic_cast<track*>(database[i])) {
+					t->print();
+					counter++;
+				}
+				else if (audio_book* b = dynamic_cast<audio_book*>(database[i])) {
+					b->print();
+					counter++;
+				}
+				else if (tv_episode* e = dynamic_cast<tv_episode*>(database[i])) {
+					e->print();
+					counter++;
+				}
+			}
+		}
+	}
+	if (counter == 0) {
+		std::cout << "Not entries in database match creator: " << creator << std::endl;
+	}
+	std::cout << std::endl;
+}
+
+void print_by_year(const std::vector<data*>& database, int length) {
+	int year = 0, counter = 0;
+
+	std::cout << std::endl << "Note: Search is case and space sensitive" << std::endl;
+	std::cout << "Enter creator: ";
+
+	year = get_input(2025);
+	std::cout << std::endl;
+
+	for (int i = 0; i < length; i++) {
+		if (base_data* d = dynamic_cast<base_data*>(database[i])) {
+			if (d->get_year() >= year) {
+				if (track* t = dynamic_cast<track*>(database[i])) {
+					t->print();
+					counter++;
+				}
+				else if (audio_book* b = dynamic_cast<audio_book*>(database[i])) {
+					b->print();
+					counter++;
+				}
+				else if (tv_episode* e = dynamic_cast<tv_episode*>(database[i])) {
+					e->print();
+					counter++;
+				}
+			}
+		}
+	}
+	if (counter == 0) {
+		std::cout << "Not entries in database released on or after: " << year << std::endl;
+	}
+	std::cout << std::endl;
+}
+
+void sort_successful() {
+	std::cout << std::endl << "Sort successful" << std::endl;
+}
+
+//This would be a good spot to build the sorting functions.
 
 void back_to_menu() {
 	std::cout << "Press 0 to return back to main menu: ";
@@ -288,11 +373,11 @@ void print_menu(const std::vector<data*>& database, int length) {
 		back_to_menu();
 		break;
 	case 5:
-		//print_by_creator(database, length);
+		print_by_creator(database, length);
 		back_to_menu();
 		break;
 	case 6:
-		//print_by_year(database, length);
+		print_by_year(database, length);
 		back_to_menu();
 		break;
 	default:
