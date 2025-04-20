@@ -200,6 +200,8 @@ void sort_successful() {
 	std::cout << std::endl << "Sort successful" << std::endl;
 }
 
+//This would be a good spot to build the sorting functions.
+
 bool verify_integer(const std::string& input) {
 	for (int i = 0; i < input.length(); i++) {
 		if (!std::isdigit(input[i])) {
@@ -237,7 +239,7 @@ int get_input(int range) {
 }
 
 void back_to_menu() {
-	std::cout << "Press 0 to return back to menu: ";
+	std::cout << "Press 0 to return back to main menu: ";
 	get_input(0);
 	std::cout << std::endl;
 }
@@ -316,6 +318,7 @@ int sort_menu_prompt() {
 	return selected;
 }
 
+//menu for sorting functions - call sorting functions here in sort_menu switch statement
 void sort_menu(const std::vector<data*>& database, int length) {
 	int selected = 0;
 	selected = sort_menu_prompt();
@@ -325,27 +328,27 @@ void sort_menu(const std::vector<data*>& database, int length) {
 		//return 
 		break;
 	case 1:
-		//Optional: Sort all entries by their rating in ascending order
+		//Optional: Add "sort all entries by their rating in ascending order" fucntion here
 		sort_successful();
 		back_to_menu();
 		break;
 	case 2:
-		//Needed: Sort all entries by their rating in descending order
+		//Needed: Add "sort all entries by their rating in descending order" fucntion here
 		sort_successful();
 		back_to_menu();
 		break;
 	case 3:
-		//Needed: Sort all entries in ascending order based on their year
+		//Needed: Add "sort all entries in ascending order based on their year" fucntion here
 		sort_successful();
 		back_to_menu();
 		break;
 	case 4:
-		//Optional: Sort all entries in descending order based on their year
+		//Optional: Add "sort all entries in descending order based on their year" fucntion here
 		sort_successful();
 		back_to_menu();
 		break;
 	case 5:
-		//Needed: Sort all entries by the lexicographical order of their title
+		//Needed: Add "sort all entries by the lexicographical order of their title" fucntion here
 		sort_successful();
 		back_to_menu();
 		break;
