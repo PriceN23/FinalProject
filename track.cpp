@@ -30,7 +30,7 @@ double track::get_rating() const {
 }
 
 void track::print() const {
-	std::cout << title
+	std::cout << "Track: " << title
 		<< ", by " << creator
 		<< " [" << album
 		<< ", " << year

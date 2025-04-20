@@ -53,7 +53,7 @@ int tv_episode::get_rating() const {
 }
 
 void tv_episode::print() const {
-	std::cout << title
+	std::cout << "TV Episode: " << title
 		<< " S:" << season_num 
 		<< " E:" << episode_num 
 		<< " " << show_title

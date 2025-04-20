@@ -321,6 +321,23 @@ void sort_successful() {
 	std::cout << std::endl << "Sort successful" << std::endl;
 }
 
+void sort_for_csv(std::vector<data*>& database, int length) {
+	//moves all tracks to top of list, followed by moving all audio book after tracks leaving tv episodes at end of list
+	int index = 0;
+	for (int i = 0; i < length; i++) { 
+		if (track* e = dynamic_cast<track*>(database[i])) {
+			std::swap(database[i], database[index]);
+			index++;
+		}
+	}
+	for (int i = index; i < length; i++) {
+		if (audio_book* e = dynamic_cast<audio_book*>(database[i])) {
+			std::swap(database[i], database[index]);
+			index++;
+		}
+	}
+}
+
 //This would be a good spot to build the sorting functions.
 
 void back_to_menu() {
@@ -404,7 +421,7 @@ int sort_menu_prompt() {
 }
 
 //menu for sorting functions - call sorting functions here in sort_menu switch statement
-void sort_menu(const std::vector<data*>& database, int length) {
+void sort_menu(std::vector<data*>& database, int length) {
 	int selected = 0;
 	selected = sort_menu_prompt();
 
@@ -460,7 +477,7 @@ int menu_prompt() {
 	return selected;
 }
 
-bool menu(const std::vector<data*>& database, int length) {
+bool menu(std::vector<data*>& database, int length) {
 	int selected = 0;
 	selected = menu_prompt();
 
