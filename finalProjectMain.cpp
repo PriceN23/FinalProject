@@ -287,8 +287,8 @@ void print_by_creator(const std::vector<data*>& database, int length) {
 void print_by_year(const std::vector<data*>& database, int length) {
 	int year = 0, counter = 0;
 
-	std::cout << std::endl << "Note: Search is case and space sensitive" << std::endl;
-	std::cout << "Enter creator: ";
+	std::cout << std::endl << "Note: Space sensitive" << std::endl;
+	std::cout << "Enter year: ";
 
 	year = get_input(2025);
 	std::cout << std::endl;
