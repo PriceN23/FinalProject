@@ -412,7 +412,7 @@ int print_menu_prompt() {
 
 	std::cout << "Make a selection: ";
 
-	int selected = -1;
+	int selected = 0;
 	selected = get_input(6);
 
 	return selected;
@@ -423,9 +423,6 @@ void print_menu(const std::vector<data*>& database, int length) {
 	selected = print_menu_prompt();
 
 	switch (selected) {
-	case 0:
-		//return 
-		break;
 	case 1:
 		print_database(database, length);
 		back_to_menu();
@@ -450,6 +447,9 @@ void print_menu(const std::vector<data*>& database, int length) {
 		print_by_year(database, length);
 		back_to_menu();
 		break;
+	case 0:
+		//return 
+		break;
 	default:
 		break;
 	}
@@ -467,7 +467,7 @@ int sort_menu_prompt() {
 
 	std::cout << "Make a selection: ";
 
-	int selected = -1;
+	int selected = 0;
 	selected = get_input(5);
 
 	return selected;
@@ -479,9 +479,6 @@ void sort_menu(std::vector<data*>& database, int length) {
 	selected = sort_menu_prompt();
 
 	switch (selected) {
-	case 0:
-		//return 
-		break;
 	case 1:
 		//Optional: Add "sort all entries by their rating in ascending order" fucntion here
 		sort_successful();
@@ -507,6 +504,9 @@ void sort_menu(std::vector<data*>& database, int length) {
 		sort_successful();
 		back_to_menu();
 		break;
+	case 0:
+		//return 
+		break;
 	default:
 		break;
 	}
@@ -524,7 +524,7 @@ int menu_prompt() {
 
 	std::cout << "Make a selection: ";
 
-	int selected = -1;
+	int selected = 0;
 	selected = get_input(5);
 
 	return selected;
@@ -537,29 +537,27 @@ bool menu(std::vector<data*>& database, int length, const std::string& path) {
 	switch (selected) {
 	case 1:
 		print_menu(database, length);
-		break;
+		return false;
 	case 2:
 		sort_menu(database, length);
-		break;
+		return false;
 	case 3:
 		//add_entry(database, length);
 		back_to_menu();
-		break;
+		return false;
 	case 4:
 		//remove_entry(database, length);
 		back_to_menu();
-		break;
+		return false;
 	case 5:
 		//Yet to be added Stretch Goal
 		back_to_menu();
-		break;
+		return false;
 	case 0:
 		return true;
-		break;
 	default:
-		break;
+		return false;
 	}
-	return false;
 }
 
 int main() {
