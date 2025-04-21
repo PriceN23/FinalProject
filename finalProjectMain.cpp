@@ -42,7 +42,7 @@ std::vector<data*> fill_database(const std::string& path, int length) {
 	stream.open(path);
 
 	if (stream.is_open()) {
-		std::string line, tracker = "Tracks";
+		std::string line, tracker = "Track";
 		std::getline(stream, line);
 
 		for (int i = 0; i < length; i++) {
@@ -54,7 +54,7 @@ std::vector<data*> fill_database(const std::string& path, int length) {
 				std::getline(stream, line, ',');
 			}
 
-			if (tracker == "Tracks") {
+			if (tracker == "Track") {
 				std::getline(stream, line, ',');
 				std::string title = line;
 
@@ -79,7 +79,7 @@ std::vector<data*> fill_database(const std::string& path, int length) {
 				database.push_back(new track(title, creator, album, year, duration, rating));
 			}
 
-			if (tracker == "Audio Books") {
+			if (tracker == "Audio Book") {
 				std::getline(stream, line, ',');
 				std::string title = line;
 
@@ -100,7 +100,7 @@ std::vector<data*> fill_database(const std::string& path, int length) {
 				database.push_back(new audio_book(title, creator, year, duration, rating));
 			}
 
-			if (tracker == "TV Episodes") {
+			if (tracker == "TV Episode") {
 				std::getline(stream, line, ',');
 				std::string title = line;
 
