@@ -138,11 +138,11 @@ std::vector<data*> fill_database(const std::string& path, int length) {
 	return database;
 }
 
-void print_database(const std::vector<data*>& database, int length) {
+void print_database(const std::vector<data*>& database) {
 	std::cout << std::endl 
 		<< "Database: " << std::endl;
 
-	for (int i = 0; i < length; i++) {
+	for (int i = 0; i < database.size(); i++) {
 		if (track* t = dynamic_cast<track*>(database[i])) {
 			t->print();
 		}
@@ -156,11 +156,11 @@ void print_database(const std::vector<data*>& database, int length) {
 	std::cout << std::endl;
 }
 
-void print_tracks(const std::vector<data*>& database, int length) {
+void print_tracks(const std::vector<data*>& database) {
 	std::cout << std::endl 
 		<< "Tracks: " << std::endl;
 
-	for (int i = 0; i < length; i++) {
+	for (int i = 0; i < database.size(); i++) {
 		if (track* t = dynamic_cast<track*>(database[i])) {
 			t->print();
 		}
@@ -168,11 +168,11 @@ void print_tracks(const std::vector<data*>& database, int length) {
 	std::cout << std::endl;
 }
 
-void print_audio_books(const std::vector<data*>& database, int length) {
+void print_audio_books(const std::vector<data*>& database) {
 	std::cout << std::endl 
 		<< "Audio Books: " << std::endl;
 
-	for (int i = 0; i < length; i++) {
+	for (int i = 0; i < database.size(); i++) {
 		if (audio_book* b = dynamic_cast<audio_book*>(database[i])) {
 			b->print();
 		}
@@ -180,11 +180,11 @@ void print_audio_books(const std::vector<data*>& database, int length) {
 	std::cout << std::endl;
 }
 
-void print_tv_episodes(const std::vector<data*>& database, int length) {
+void print_tv_episodes(const std::vector<data*>& database) {
 	std::cout << std::endl 
 		<< "TV Episodes: " << std::endl;
 
-	for (int i = 0; i < length; i++) {
+	for (int i = 0; i < database.size(); i++) {
 		if (tv_episode* e = dynamic_cast<tv_episode*>(database[i])) {
 			e->print();
 		}
@@ -196,10 +196,15 @@ void invalid_input() {
 	std::cout << "Invalid entry, please make another seleciton: ";
 }
 
-bool verify_integer(const std::string& input) {
+bool verify_num(const std::string& input, bool decimal) {
 	for (int i = 0; i < input.length(); i++) {
 		if (!std::isdigit(input[i])) {
-			return false;
+			if (decimal == true && input[i] == '.') {
+				//pass value
+			}
+			else {
+				return false;
+			}
 		}
 	}
 	return true;
@@ -220,7 +225,7 @@ int get_input(int range) {
 	do {
 		std::getline(std::cin, input);
 
-		if (input.length() > 0 && verify_integer(input) == true && within_range(input, range) == true) {
+		if (input.length() > 0 && verify_num(input, false) == true && within_range(input, range) == true) {
 			selected = std::stoi(input);
 			end = true;
 		}
@@ -250,7 +255,7 @@ std::string get_input() {
 	return input;
 }
 
-void print_by_creator(const std::vector<data*>& database, int length) {
+void print_by_creator(const std::vector<data*>& database) {
 	std::string creator = "Unknown";
 	int counter = 0;
 
@@ -260,7 +265,7 @@ void print_by_creator(const std::vector<data*>& database, int length) {
 	creator = get_input();
 	std::cout << std::endl;
 
-	for (int i = 0; i < length; i++) {
+	for (int i = 0; i < database.size(); i++) {
 		if (base_data* d = dynamic_cast<base_data*>(database[i])) {
 			if (d->get_creator() == creator) {
 				if (track* t = dynamic_cast<track*>(database[i])) {
@@ -284,7 +289,7 @@ void print_by_creator(const std::vector<data*>& database, int length) {
 	std::cout << std::endl;
 }
 
-void print_by_year(const std::vector<data*>& database, int length) {
+void print_by_year(const std::vector<data*>& database) {
 	int year = 0, counter = 0;
 
 	std::cout << std::endl << "Note: Space sensitive" << std::endl;
@@ -293,7 +298,7 @@ void print_by_year(const std::vector<data*>& database, int length) {
 	year = get_input(2025);
 	std::cout << std::endl;
 
-	for (int i = 0; i < length; i++) {
+	for (int i = 0; i < database.size(); i++) {
 		if (base_data* d = dynamic_cast<base_data*>(database[i])) {
 			if (d->get_year() >= year) {
 				if (track* t = dynamic_cast<track*>(database[i])) {
@@ -317,20 +322,28 @@ void print_by_year(const std::vector<data*>& database, int length) {
 	std::cout << std::endl;
 }
 
+void back_to_menu() {
+	std::cout << "Press 0 to return back to main menu: ";
+	get_input(0);
+	std::cout << std::endl;
+}
+
 void sort_successful() {
 	std::cout << std::endl << "Sort successful" << std::endl;
 }
 
-void sort_for_csv(std::vector<data*>& database, int length) {
+//This would be a good spot to build the sorting functions.
+
+void sort_for_csv(std::vector<data*>& database) {
 	//moves all tracks to top of list, followed by moving all audio book after tracks leaving tv episodes at end of list
 	int index = 0;
-	for (int i = 0; i < length; i++) { 
+	for (int i = 0; i < database.size(); i++) {
 		if (track* e = dynamic_cast<track*>(database[i])) {
 			std::swap(database[i], database[index]);
 			index++;
 		}
 	}
-	for (int i = index; i < length; i++) {
+	for (int i = index; i < database.size(); i++) {
 		if (audio_book* e = dynamic_cast<audio_book*>(database[i])) {
 			std::swap(database[i], database[index]);
 			index++;
@@ -338,9 +351,9 @@ void sort_for_csv(std::vector<data*>& database, int length) {
 	}
 }
 
-void update_csv(std::vector<data*>& database, int length, const std::string& path) {
+void update_csv(std::vector<data*>& database, const std::string& path) {
 	std::cout << std::endl << "Updating database..." << std::endl;
-	sort_for_csv(database, length);
+	sort_for_csv(database);
 
 	std::ofstream stream;
 	int counter = 0;
@@ -348,7 +361,7 @@ void update_csv(std::vector<data*>& database, int length, const std::string& pat
 	stream.open(path);
 	if (stream.is_open()) {
 		stream << "Track,Title,Creator,Album,Year,Duration,Rating" << std::endl;
-		for (int i = 0; i < length; i++) {
+		for (int i = 0; i < database.size(); i++) {
 			if (track* t = dynamic_cast<track*>(database[i])) {
 				stream << "Track,"
 					<< t->get_title() << ","
@@ -361,7 +374,7 @@ void update_csv(std::vector<data*>& database, int length, const std::string& pat
 			}
 		}
 		stream << "Audio Book,Title,Creator,Year,Duration,Rating" << std::endl;
-		for (int i = counter; i < length; i++) {
+		for (int i = counter; i < database.size(); i++) {
 			if (audio_book* t = dynamic_cast<audio_book*>(database[i])) {
 				stream << "Audio Book,"
 					<< t->get_title() << ","
@@ -373,7 +386,7 @@ void update_csv(std::vector<data*>& database, int length, const std::string& pat
 			}
 		}
 		stream << "TV Episode,Title,Show Title,Creator,Year,Season Number,Episode Number,Duration,Rating" << std::endl;
-		for (int i = counter; i < length; i++) {
+		for (int i = counter; i < database.size(); i++) {
 			if (tv_episode* t = dynamic_cast<tv_episode*>(database[i])) {
 				stream << "TV Episode,"
 					<< t->get_title() << ","
@@ -388,15 +401,356 @@ void update_csv(std::vector<data*>& database, int length, const std::string& pat
 		}
 	}
 	stream.close();
-	std::cout << "Update Successful" << std::endl;
+	std::cout << "Update Successful" << std::endl << std::endl;
 }
 
-//This would be a good spot to build the sorting functions.
+int add_entry_prompt() {
+	std::cout << std::endl
+		<< "Add entry" << std::endl
+		<< "1 Track" << std::endl
+		<< "2 Audio Book" << std::endl
+		<< "3 TV Episode" << std::endl
+		<< "0 Return to previous menu" << std::endl;
 
-void back_to_menu() {
-	std::cout << "Press 0 to return back to main menu: ";
-	get_input(0);
-	std::cout << std::endl;
+	std::cout << "Make a selection: ";
+
+	int selected = 0;
+	selected = get_input(3);
+
+	return selected;
+}
+
+void add_track(std::vector<data*>& database, const std::string& path) {
+	std::string line;
+	bool next = false;
+
+	std::cout << std::endl << "Title: ";
+	std::string title = "";
+	do {
+		std::getline(std::cin, line);
+
+		if (line.length() > 0) {
+			title = line;
+			next = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (next == false);
+
+	next = false;
+	std::cout << "Creator: ";
+	std::string creator = "";
+	do {
+		std::getline(std::cin, line);
+
+		if (line.length() > 0) {
+			creator = line;
+			next = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (next == false);
+
+	next = false;
+	std::cout << "Album: ";
+	std::string album = "";
+	do {
+		std::getline(std::cin, line);
+
+		if (line.length() > 0) {
+			album = line;
+			next = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (next == false);
+
+	next = false;
+	std::cout << "Year (integer 1800-2025 inlcusive): ";
+	int year = 0;
+	do {
+		std::getline(std::cin, line);
+
+		if (line.length() > 0 && verify_num(line, false) && within_range(line, 2025) == true) {
+			year = std::stoi(line);
+			next = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (next == false);
+
+	next = false;
+	std::cout << "Duration in minutes (decimal 0-100000 inlcusive): ";
+	double duration = 0;
+	do {
+		std::getline(std::cin, line);
+
+		if (line.length() > 0 && verify_num(line, true) && within_range(line, 100000) == true) {
+			duration = std::stod(line);
+			next = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (next == false);
+
+	next = false;
+	std::cout << "Rating (decimal 0-5 inlcusive): ";
+	double rating = 0;
+	do {
+		std::getline(std::cin, line);
+
+		if (line.length() > 0 && verify_num(line, true) && within_range(line, 5) == true) {
+			rating = std::stod(line);
+			next = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (next == false);
+
+	database.push_back(new track(title, creator, album, year, duration, rating));
+
+	update_csv(database, path);
+}
+
+void add_audio_book(std::vector<data*>& database, const std::string& path) {
+	std::string line;
+	bool next = false;
+
+	std::cout << std::endl << "Title: ";
+	std::string title = "";
+	do {
+		std::getline(std::cin, line);
+
+		if (line.length() > 0) {
+			title = line;
+			next = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (next == false);
+
+	next = false;
+	std::cout << "Creator: ";
+	std::string creator = "";
+	do {
+		std::getline(std::cin, line);
+
+		if (line.length() > 0) {
+			creator = line;
+			next = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (next == false);
+
+	next = false;
+	std::cout << "Year (integer 1800-2025 inlcusive): ";
+	int year = 0;
+	do {
+		std::getline(std::cin, line);
+
+		if (line.length() > 0 && verify_num(line, false) && within_range(line, 2025) == true) {
+			year = std::stoi(line);
+			next = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (next == false);
+
+	next = false;
+	std::cout << "Duration in minutes (decimal 0-100000 inlcusive): ";
+	double duration = 0;
+	do {
+		std::getline(std::cin, line);
+
+		if (line.length() > 0 && verify_num(line, true) && within_range(line, 100000) == true) {
+			duration = std::stod(line);
+			next = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (next == false);
+
+	next = false;
+	std::cout << "Thumbs up or thumbs down (type up or down): ";
+	int rating = 0;
+	do {
+		std::getline(std::cin, line);
+
+		if (line.length() > 0) {
+			rating = 0;				// I need to fix this!
+			next = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (next == false);
+
+	database.push_back(new audio_book(title, creator, year, duration, rating));
+
+	update_csv(database, path);
+}
+
+void add_tv_episode(std::vector<data*>& database, const std::string& path) {
+	std::string line;
+	bool next = false;
+
+	std::cout << std::endl << "Title: ";
+	std::string title = "";
+	do {
+		std::getline(std::cin, line);
+
+		if (line.length() > 0) {
+			title = line;
+			next = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (next == false);
+
+	next = false;
+	std::cout << "Show title: ";
+	std::string show_title = "";
+	do {
+		std::getline(std::cin, line);
+
+		if (line.length() > 0) {
+			show_title = line;
+			next = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (next == false);
+
+	next = false;
+	std::cout << "Creator: ";
+	std::string creator = "";
+	do {
+		std::getline(std::cin, line);
+
+		if (line.length() > 0) {
+			creator = line;
+			next = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (next == false);
+
+	next = false;
+	std::cout << "Year (integer 1800-2025 inlcusive): ";
+	int year = 0;
+	do {
+		std::getline(std::cin, line);
+
+		if (line.length() > 0 && verify_num(line, false) && within_range(line, 2025) == true) {
+			year = std::stoi(line);
+			next = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (next == false);
+
+	next = false;
+	std::cout << "Season number (integer 0-1000 inlcusive): ";
+	int season_num = 0;
+	do {
+		std::getline(std::cin, line);
+
+		if (line.length() > 0 && verify_num(line, false) && within_range(line, 1000) == true) {
+			season_num = std::stoi(line);
+			next = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (next == false);
+
+	next = false;
+	std::cout << "Episode number (integer 0-100000 inlcusive): ";
+	int episode_num = 0;
+	do {
+		std::getline(std::cin, line);
+
+		if (line.length() > 0 && verify_num(line, false) && within_range(line, 100000) == true) {
+			episode_num = std::stoi(line);
+			next = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (next == false);
+
+	next = false;
+	std::cout << "Duration in minutes (decimal 0-100000 inlcusive): ";
+	double duration = 0;
+	do {
+		std::getline(std::cin, line);
+
+		if (line.length() > 0 && verify_num(line, true) && within_range(line, 100000) == true) {
+			duration = std::stod(line);
+			next = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (next == false);
+
+	next = false;
+	std::cout << "Rating (decimal 0-10 inlcusive): ";
+	double rating = 0;
+	do {
+		std::getline(std::cin, line);
+
+		if (line.length() > 0 && verify_num(line, true) && within_range(line, 10) == true) {
+			rating = std::stod(line);
+			next = true;
+		}
+		else {
+			invalid_input();
+		}
+	} while (next == false);
+
+	database.push_back(new tv_episode(title, show_title, creator, year, season_num, episode_num, duration, rating));
+
+	update_csv(database, path);
+}
+
+void add_entry(std::vector<data*>& database, const std::string& path) {
+	int selected = 0;
+	selected = add_entry_prompt();
+
+	switch (selected) {
+	case 1:
+		add_track(database, path);
+		back_to_menu();
+		break;
+	case 2:
+		add_audio_book(database, path);
+		back_to_menu();
+		break;
+	case 3:
+		add_tv_episode(database, path);
+		back_to_menu();
+		break;
+		//return 
+		break;
+	default:
+		break;
+	}
 }
 
 int print_menu_prompt() {
@@ -418,33 +772,33 @@ int print_menu_prompt() {
 	return selected;
 }
 
-void print_menu(const std::vector<data*>& database, int length) {
+void print_menu(const std::vector<data*>& database) {
 	int selected = 0;
 	selected = print_menu_prompt();
 
 	switch (selected) {
 	case 1:
-		print_database(database, length);
+		print_database(database);
 		back_to_menu();
 		break;
 	case 2:
-		print_tracks(database, length);
+		print_tracks(database);
 		back_to_menu();
 		break;
 	case 3:
-		print_audio_books(database, length);
+		print_audio_books(database);
 		back_to_menu();
 		break;
 	case 4:
-		print_tv_episodes(database, length);
+		print_tv_episodes(database);
 		back_to_menu();
 		break;
 	case 5:
-		print_by_creator(database, length);
+		print_by_creator(database);
 		back_to_menu();
 		break;
 	case 6:
-		print_by_year(database, length);
+		print_by_year(database);
 		back_to_menu();
 		break;
 	case 0:
@@ -474,7 +828,7 @@ int sort_menu_prompt() {
 }
 
 //menu for sorting functions - call sorting functions here in sort_menu switch statement
-void sort_menu(std::vector<data*>& database, int length) {
+void sort_menu(std::vector<data*>& database) {
 	int selected = 0;
 	selected = sort_menu_prompt();
 
@@ -530,28 +884,25 @@ int menu_prompt() {
 	return selected;
 }
 
-bool menu(std::vector<data*>& database, int length, const std::string& path) {
+bool menu(std::vector<data*>& database, const std::string& path) {
 	int selected = 0;
 	selected = menu_prompt();
 
 	switch (selected) {
 	case 1:
-		print_menu(database, length);
+		print_menu(database);
 		return false;
 	case 2:
-		sort_menu(database, length);
+		sort_menu(database);
 		return false;
 	case 3:
-		//add_entry(database, length);
-		back_to_menu();
+		add_entry(database, path);
 		return false;
 	case 4:
-		//remove_entry(database, length);
-		back_to_menu();
+		//remove_entry(database, path);
 		return false;
 	case 5:
 		//Yet to be added Stretch Goal
-		back_to_menu();
 		return false;
 	case 0:
 		return true;
@@ -570,12 +921,12 @@ int main() {
 	bool quit = false;
 
 	do {
-		quit = menu(database, length, path);
+		quit = menu(database, path);
 	} while (quit == false);
 
-	update_csv(database, length, path);
+	update_csv(database, path);
 
-	for (int i = 0; i < length; i++) {
+	for (int i = 0; i < database.size(); i++) {
 		delete database[i];
 	}
 

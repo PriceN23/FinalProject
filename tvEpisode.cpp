@@ -21,11 +21,11 @@ tv_episode::tv_episode(const std::string& title,
 		throw std::exception("Season number must be between 1 and 1000 (inclusive)");
 	}
 
-	if (episode_num > 0 && episode_num <= 10000) {
+	if (episode_num > 0 && episode_num <= 100000) {
 		this->episode_num = episode_num;
 	}
 	else {
-		throw std::exception("Episode number must be between 1 and 10000 (inclusive)");
+		throw std::exception("Episode number must be between 1 and 100000 (inclusive)");
 	}
 
 	if (rating >= 0 && rating <= 10) {

@@ -5,7 +5,7 @@ track::track(const std::string& title,
 	const std::string& album, int year, 
 	double duration, double rating) 
 	: base_data(title, creator, year, duration) {
-	//: base_data(title, creator, year, duration) 
+	
 	if (album.length() > 0) {
 		this->album = album;
 	}

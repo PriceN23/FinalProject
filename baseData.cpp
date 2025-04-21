@@ -25,11 +25,11 @@ base_data::base_data(const std::string& title,
 		throw std::exception("Year must be between 1800 and 2025 (inlcusive)");
 	}
 
-	if (duration >= 0.0 && duration <= 10000.0) {
+	if (duration >= 0.0 && duration <= 100000.0) {
 		this->duration = duration;
 	}
 	else {
-		throw std::exception("Duration can not be negative or greater than 10000 minutes");
+		throw std::exception("Duration can not be negative or greater than 100000 minutes");
 	}
 }
 
