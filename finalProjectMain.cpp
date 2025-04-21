@@ -477,7 +477,7 @@ int menu_prompt() {
 	return selected;
 }
 
-bool menu(std::vector<data*>& database, int length) {
+bool menu(std::vector<data*>& database, int length, const std::string& path) {
 	int selected = 0;
 	selected = menu_prompt();
 
@@ -509,8 +509,64 @@ bool menu(std::vector<data*>& database, int length) {
 	return false;
 }
 
+void update_csv(std::vector<data*>& database, int length, const std::string& path) {
+	const std::string path2 = "Data\\tempdatabase.csv";
+	
+	std::cout << "Updating database..." << std::endl;
+	sort_for_csv(database, length);
+
+	std::ofstream stream;
+	int counter = 0;
+
+	stream.open(path2);
+	if (stream.is_open()) {
+		//stream << "Tracks" << "," << "Creator" << "," << "Album" << "," << "Year" << "," << "Duration" << "," << "Rating" << std::endl;
+		stream << "Track,Title,Creator,Album,Year,Duration,Rating" << std::endl;
+		for (int i = 0; i < length; i++) {
+			if (track* t = dynamic_cast<track*>(database[i])) {
+				stream << "Track,"
+					<< t->get_title() << ","
+					<< t->get_creator() << ","
+					<< t->get_album() << ","
+					<< t->get_year() << ","
+					<< t->get_duration() << ","
+					<< t->get_rating() << std::endl;
+				counter++;
+			}
+		}
+		stream << "Audio Book,Title,Creator,Year,Duration,Rating" << std::endl;
+		for (int i = counter; i < length; i++) {
+			if (audio_book* t = dynamic_cast<audio_book*>(database[i])) {
+				stream << "Audio Book,"
+					<< t->get_title() << ","
+					<< t->get_creator() << ","
+					<< t->get_year() << ","
+					<< t->get_duration() << ","
+					<< t->get_rating() << std::endl;
+				counter++;
+			}
+		}
+		stream << "TV Episode,Title,Show Title,Creator,Year,Season Number,Episode Number,Duration,Rating" << std::endl;
+		for (int i = counter; i < length; i++) {
+			if (tv_episode* t = dynamic_cast<tv_episode*>(database[i])) {
+				stream << "TV Episode,"
+					<< t->get_title() << ","
+					<< t->get_show_title() << ","
+					<< t->get_creator() << ","
+					<< t->get_year() << ","
+					<< t->get_season_num() << ","
+					<< t->get_episode_num() << ","
+					<< t->get_duration() << ","
+					<< t->get_rating() << std::endl;
+				//counter++;
+			}
+		}
+	}
+	stream.close();
+}
+
 int main() {
-	std::string path = "Data\\database.csv";
+	const std::string path = "Data\\database.csv";
 	
 	int length = get_line_count(path) - 3;
 
@@ -519,8 +575,10 @@ int main() {
 	bool quit = false;
 
 	do {
-		quit = menu(database, length);
+		quit = menu(database, length, path);
 	} while (quit == false);
+
+	update_csv(database, length, path);
 
 	for (int i = 0; i < length; i++) {
 		delete database[i];
