@@ -338,6 +338,59 @@ void sort_for_csv(std::vector<data*>& database, int length) {
 	}
 }
 
+void update_csv(std::vector<data*>& database, int length, const std::string& path) {
+	std::cout << std::endl << "Updating database..." << std::endl;
+	sort_for_csv(database, length);
+
+	std::ofstream stream;
+	int counter = 0;
+
+	stream.open(path);
+	if (stream.is_open()) {
+		stream << "Track,Title,Creator,Album,Year,Duration,Rating" << std::endl;
+		for (int i = 0; i < length; i++) {
+			if (track* t = dynamic_cast<track*>(database[i])) {
+				stream << "Track,"
+					<< t->get_title() << ","
+					<< t->get_creator() << ","
+					<< t->get_album() << ","
+					<< t->get_year() << ","
+					<< t->get_duration() << ","
+					<< t->get_rating() << std::endl;
+				counter++;
+			}
+		}
+		stream << "Audio Book,Title,Creator,Year,Duration,Rating" << std::endl;
+		for (int i = counter; i < length; i++) {
+			if (audio_book* t = dynamic_cast<audio_book*>(database[i])) {
+				stream << "Audio Book,"
+					<< t->get_title() << ","
+					<< t->get_creator() << ","
+					<< t->get_year() << ","
+					<< t->get_duration() << ","
+					<< t->get_rating() << std::endl;
+				counter++;
+			}
+		}
+		stream << "TV Episode,Title,Show Title,Creator,Year,Season Number,Episode Number,Duration,Rating" << std::endl;
+		for (int i = counter; i < length; i++) {
+			if (tv_episode* t = dynamic_cast<tv_episode*>(database[i])) {
+				stream << "TV Episode,"
+					<< t->get_title() << ","
+					<< t->get_show_title() << ","
+					<< t->get_creator() << ","
+					<< t->get_year() << ","
+					<< t->get_season_num() << ","
+					<< t->get_episode_num() << ","
+					<< t->get_duration() << ","
+					<< t->get_rating() << std::endl;
+			}
+		}
+	}
+	stream.close();
+	std::cout << "Update Successful" << std::endl;
+}
+
 //This would be a good spot to build the sorting functions.
 
 void back_to_menu() {
@@ -507,62 +560,6 @@ bool menu(std::vector<data*>& database, int length, const std::string& path) {
 		break;
 	}
 	return false;
-}
-
-void update_csv(std::vector<data*>& database, int length, const std::string& path) {
-	const std::string path2 = "Data\\tempdatabase.csv";
-	
-	std::cout << "Updating database..." << std::endl;
-	sort_for_csv(database, length);
-
-	std::ofstream stream;
-	int counter = 0;
-
-	stream.open(path2);
-	if (stream.is_open()) {
-		//stream << "Tracks" << "," << "Creator" << "," << "Album" << "," << "Year" << "," << "Duration" << "," << "Rating" << std::endl;
-		stream << "Track,Title,Creator,Album,Year,Duration,Rating" << std::endl;
-		for (int i = 0; i < length; i++) {
-			if (track* t = dynamic_cast<track*>(database[i])) {
-				stream << "Track,"
-					<< t->get_title() << ","
-					<< t->get_creator() << ","
-					<< t->get_album() << ","
-					<< t->get_year() << ","
-					<< t->get_duration() << ","
-					<< t->get_rating() << std::endl;
-				counter++;
-			}
-		}
-		stream << "Audio Book,Title,Creator,Year,Duration,Rating" << std::endl;
-		for (int i = counter; i < length; i++) {
-			if (audio_book* t = dynamic_cast<audio_book*>(database[i])) {
-				stream << "Audio Book,"
-					<< t->get_title() << ","
-					<< t->get_creator() << ","
-					<< t->get_year() << ","
-					<< t->get_duration() << ","
-					<< t->get_rating() << std::endl;
-				counter++;
-			}
-		}
-		stream << "TV Episode,Title,Show Title,Creator,Year,Season Number,Episode Number,Duration,Rating" << std::endl;
-		for (int i = counter; i < length; i++) {
-			if (tv_episode* t = dynamic_cast<tv_episode*>(database[i])) {
-				stream << "TV Episode,"
-					<< t->get_title() << ","
-					<< t->get_show_title() << ","
-					<< t->get_creator() << ","
-					<< t->get_year() << ","
-					<< t->get_season_num() << ","
-					<< t->get_episode_num() << ","
-					<< t->get_duration() << ","
-					<< t->get_rating() << std::endl;
-				//counter++;
-			}
-		}
-	}
-	stream.close();
 }
 
 int main() {

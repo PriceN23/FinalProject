@@ -1,27 +1,27 @@
-﻿Track,Title,Creator,Album,Year,Duration,Rating,,
-Track,Hysteria,Muse,Absolution,2003,3.78,4.4,,
-Track,Everlong,Foo Fighters,The Colour and the Shape,1997,4.16,4.9,,
-Track,One,Metallica,And Justice for All,1988,7.45,4.4,,
-Track,When Doves Cry,Prince,Purple Rain,1984,5.87,4.9,,
-Track,Where is My Mind,Pixies,Surfer Rosa,1988,3.88,4.3,,
-Track,Creep,Radiohead,Pablo Honey,1993,3.96,4.8,,
-Track,Come Together,The Beatles,Abbey Road,1969,4.32,5,,
-Track,Master of Puppets,Metallica,Master of Puppets,1986,8.6,4.8,,
-Audio Book,Title,Creator,Year,Duration,Rating,,,
-Audio Book,The Sandman,Neil Gaiman,2020,662,0,,,
-Audio Book,The Sandman Act II,Neil Gaiman,2021,827,0,,,
-Audio Book,The Sandman Act III,Neil Gaiman,2022,691,0,,,
-Audio Book,The Alchemist,Paulo Coelho,2004,240,0,,,
-Audio Book,Dune,Frank Herbert,2006,1262,0,,,
-Audio Book,Harry Potter and the Half-Blood Prince,J.K. Rowling,2015,1112,0,,,
-Audio Book,Harry Potter and the Deathly Hallows,J.K. Rowling,2015,1296,0,,,
-Audio Book,The Great Gatsby,F. Scott Fitzgerald,2013,289,0,,,
+Track,Title,Creator,Album,Year,Duration,Rating
+Track,Hysteria,Muse,Absolution,2003,3.78,4.4
+Track,Everlong,Foo Fighters,The Colour and the Shape,1997,4.16,4.9
+Track,One,Metallica,And Justice for All,1988,7.45,4.4
+Track,When Doves Cry,Prince,Purple Rain,1984,5.87,4.9
+Track,Where is My Mind,Pixies,Surfer Rosa,1988,3.88,4.3
+Track,Creep,Radiohead,Pablo Honey,1993,3.96,4.8
+Track,Come Together,The Beatles,Abbey Road,1969,4.32,5
+Track,Master of Puppets,Metallica,Master of Puppets,1986,8.6,4.8
+Audio Book,Title,Creator,Year,Duration,Rating
+Audio Book,The Sandman,Neil Gaiman,2020,662,0
+Audio Book,The Sandman Act II,Neil Gaiman,2021,827,0
+Audio Book,The Sandman Act III,Neil Gaiman,2022,691,0
+Audio Book,The Alchemist,Paulo Coelho,2004,240,0
+Audio Book,Dune,Frank Herbert,2006,1262,0
+Audio Book,Harry Potter and the Half-Blood Prince,J.K. Rowling,2015,1112,0
+Audio Book,Harry Potter and the Deathly Hallows,J.K. Rowling,2015,1296,0
+Audio Book,The Great Gatsby,F. Scott Fitzgerald,2013,289,0
 TV Episode,Title,Show Title,Creator,Year,Season Number,Episode Number,Duration,Rating
-TV Episode,Fullmetal Alchemist: Brotherhood,Flame of Vengeance,Hiromu Arakawa,2009,2,27,24,9.1
-TV Episode,Castlevania,For Love,Warren Ellis,2018,2,7,27,9.4
-TV Episode,Castlevania,Monument,Warren Ellis,2017,1,4,23,8.4
-TV Episode,Naruto: Shippuden,Moonlit Night,Masashi Kishimoto,2016,20,42,20,7.6
-TV Episode,Naruto,Gaara vs. Rock Lee,Masashi Kishimoto,2003,1,48,20,9.3
-TV Episode,Attack on Titan,Hero,Hajime Isayama,2019,3,17,24,9.8
-TV Episode,Stargate SG-1,Window of Opportunity,Brad Wright,2000,4,22,44,9.5
-TV Episode,Stargate Atlantis,First Contact,Brad Wright,2008,5,10,44,7.8
+TV Episode,Fullmetal Alchemist: Brotherhood,Flame of Vengeance,Hiromu Arakawa,2009,2,27,24,9
+TV Episode,Castlevania,For Love,Warren Ellis,2018,2,7,27,9
+TV Episode,Castlevania,Monument,Warren Ellis,2017,1,4,23,8
+TV Episode,Naruto: Shippuden,Moonlit Night,Masashi Kishimoto,2016,20,42,20,7
+TV Episode,Naruto,Gaara vs. Rock Lee,Masashi Kishimoto,2003,1,48,20,9
+TV Episode,Attack on Titan,Hero,Hajime Isayama,2019,3,17,24,9
+TV Episode,Stargate SG-1,Window of Opportunity,Brad Wright,2000,4,22,44,9
+TV Episode,Stargate Atlantis,First Contact,Brad Wright,2008,5,10,44,7
