@@ -8,8 +8,8 @@ Files:
 	audioBook.h, audioBook.cpp, tvEpisode.h, tvEpisode.cpp, Data\database.csv
 
 Stretch Goals:
-1. (Inprogress) Implemented allowing the user to add a new entry to the database. Also updates the orignal database file.
-2. (Inprogress) Implemented allowing the user to remove an entry from the database. Also updates the original databse file.
+1. Implemented allowing the user to add a new entry to the database. Also updates the orignal database file.
+2. Implemented allowing the user to remove an entry from the database. Also updates the original databse file.
 3. (Inprogress)
 */
 #include "track.h"
@@ -49,7 +49,6 @@ std::vector<data*> fill_database(const std::string& path, int length) {
 			std::getline(stream, line, ',');
 			if (line != tracker) {
 				tracker = line;
-				std::cout << line << " " << tracker << std::endl;
 				std::getline(stream, line);
 				std::getline(stream, line, ',');
 			}
@@ -65,15 +64,12 @@ std::vector<data*> fill_database(const std::string& path, int length) {
 				std::string album = line;
 
 				std::getline(stream, line, ',');
-				//make function to verify is int!
 				int year = std::stoi(line);
 
 				std::getline(stream, line, ',');
-				//make function to verify double!
 				double duration = std::stod(line);
 
 				std::getline(stream, line);
-				//make function to verify double!
 				double rating = std::stod(line);
 
 				database.push_back(new track(title, creator, album, year, duration, rating));
@@ -87,11 +83,9 @@ std::vector<data*> fill_database(const std::string& path, int length) {
 				std::string creator = line;
 
 				std::getline(stream, line, ',');
-				//make function to verify is int!
 				int year = std::stoi(line);
 
 				std::getline(stream, line, ',');
-				//make function to verify double!
 				double duration = std::stoi(line);
 
 				std::getline(stream, line);
@@ -111,23 +105,18 @@ std::vector<data*> fill_database(const std::string& path, int length) {
 				std::string creator = line;
 
 				std::getline(stream, line, ',');
-				//make function to verify is int!
 				int year = std::stoi(line);
 
 				std::getline(stream, line, ',');
-				//make function to verify is int!
 				int season = std::stoi(line);
 
 				std::getline(stream, line, ',');
-				//make function to verify is int!
 				int episode = std::stoi(line);
 
 				std::getline(stream, line, ',');
-				//make function to verify double!
 				double duration = std::stod(line);
 
 				std::getline(stream, line);
-				//make function to verify double!
 				double rating = std::stod(line);
 
 				database.push_back(new tv_episode(title, show_title, creator, year, season, episode, duration, rating));
@@ -421,6 +410,8 @@ int add_entry_prompt() {
 }
 
 void add_track(std::vector<data*>& database, const std::string& path) {
+	sort_for_csv(database);
+
 	std::string line;
 	bool next = false;
 
@@ -519,6 +510,8 @@ void add_track(std::vector<data*>& database, const std::string& path) {
 }
 
 void add_audio_book(std::vector<data*>& database, const std::string& path) {
+	sort_for_csv(database);
+	
 	std::string line;
 	bool next = false;
 
@@ -602,6 +595,8 @@ void add_audio_book(std::vector<data*>& database, const std::string& path) {
 }
 
 void add_tv_episode(std::vector<data*>& database, const std::string& path) {
+	sort_for_csv(database);
+	
 	std::string line;
 	bool next = false;
 
@@ -729,7 +724,7 @@ void add_tv_episode(std::vector<data*>& database, const std::string& path) {
 	update_csv(database, path);
 }
 
-void add_entry(std::vector<data*>& database, const std::string& path) {
+void add_entry_menu(std::vector<data*>& database, const std::string& path) {
 	int selected = 0;
 	selected = add_entry_prompt();
 
@@ -746,7 +741,97 @@ void add_entry(std::vector<data*>& database, const std::string& path) {
 		add_tv_episode(database, path);
 		back_to_menu();
 		break;
+		//return
+		std::cout << std::endl;
+		break;
+	default:
+		break;
+	}
+}
+
+void remove_entry(std::vector<data*>& database, const std::string& path) {
+	std::string title;
+	bool match = false;
+
+	std::cout << std::endl << "Note: Case and space sensitive" << std::endl;
+	std::cout << "Enter title name to remove from database: ";
+
+	title = get_input();
+
+	for (int i = 0; i < database.size(); i ++) {
+		if (base_data* d = dynamic_cast<base_data*>(database[i])) {
+			if (d->get_title() == title) {
+				std::cout << std::endl << title << " matches title in database" << std::endl;
+				match = true;
+
+				database.erase(database.begin() + i);
+				update_csv(database, path);
+			}
+		}
+	}
+	if (match == false) {
+		std::cout << std::endl << "No matches found in database for " << title << std::endl;
+	}
+}
+
+void remove_entry_tv_episode(std::vector<data*>& database, const std::string& path) {
+	std::string title;
+	bool match = false;
+
+	std::cout << std::endl << "Note: Case and space sensitive" << std::endl;
+	std::cout << "Enter show title name to remove from database: ";
+
+	title = get_input();
+
+	for (int i = 0; i < database.size(); i++) {
+		if (tv_episode* e = dynamic_cast<tv_episode*>(database[i])) {
+			if (e->get_show_title() == title) {
+				std::cout << std::endl << title << " matches show title in database" << std::endl;
+				match = true;
+
+				database.erase(database.begin() + i);
+				update_csv(database, path);
+			}
+		}
+	}
+	if (match == false) {
+		std::cout << std::endl << "No matches found in database for " << title << std::endl;
+	}
+}
+
+int remove_entry_menu_prompt() {
+	std::cout << std::endl
+		<< "Remove Entry Menu" << std::endl
+		<< "1 Remove track" << std::endl
+		<< "2 Remove audio book" << std::endl
+		<< "3 Remove tv episode" << std::endl
+		<< "0 Return to previous menu" << std::endl;
+
+	std::cout << "Make a selection: ";
+
+	int selected = 0;
+	selected = get_input(3);
+
+	return selected;
+}
+
+void remove_entry_menu(std::vector<data*>& database, const std::string& path) {
+	int selected = 0;
+	selected = remove_entry_menu_prompt();
+
+	switch (selected) {
+	case 1:
+		remove_entry(database, path);
+		break;
+	case 2:
+		remove_entry(database, path);
+		break;
+	case 3:
+		remove_entry_tv_episode(database, path);
+		break;
+	case 0:
 		//return 
+		std::cout << std::endl;
 		break;
 	default:
 		break;
@@ -803,6 +888,7 @@ void print_menu(const std::vector<data*>& database) {
 		break;
 	case 0:
 		//return 
+		std::cout << std::endl;
 		break;
 	default:
 		break;
@@ -859,7 +945,8 @@ void sort_menu(std::vector<data*>& database) {
 		back_to_menu();
 		break;
 	case 0:
-		//return 
+		//return
+		std::cout << std::endl;
 		break;
 	default:
 		break;
@@ -867,8 +954,7 @@ void sort_menu(std::vector<data*>& database) {
 }
 
 int menu_prompt() {
-	std::cout << std::endl
-		<< "Main Menu" << std::endl
+	std::cout << "Main Menu" << std::endl
 		<< "1 Print options" << std::endl
 		<< "2 Sort options" << std::endl
 		<< "3 Add new entry to database" << std::endl
@@ -896,10 +982,10 @@ bool menu(std::vector<data*>& database, const std::string& path) {
 		sort_menu(database);
 		return false;
 	case 3:
-		add_entry(database, path);
+		add_entry_menu(database, path);
 		return false;
 	case 4:
-		//remove_entry(database, path);
+		remove_entry_menu(database, path);
 		return false;
 	case 5:
 		//Yet to be added Stretch Goal
@@ -924,7 +1010,7 @@ int main() {
 		quit = menu(database, path);
 	} while (quit == false);
 
-	update_csv(database, path);
+	update_csv(database, path); //There are 5 others of this function
 
 	for (int i = 0; i < database.size(); i++) {
 		delete database[i];
