@@ -3,10 +3,6 @@ Troy Poniewaz & Nicholas Price <br/>
 CompSci 222-01 <br/>
 05/07/2025 <br/>
 
-#### Files
-finalProjectMain.cpp, data.h, baseData.h, baseData.cpp, track.h, track.cpp, audioBook.h, audioBook.cpp, tvEpisode.h, tvEpisode.cpp, 
-README.md, FinalProject.sln, FinalProject.vcxproj, FinalProject.vcxproj.filters, .gitattributes, & .gitignore
-
 ### Description
 A program similar to multimedia players such as iTunes, Spotify, etc.
 The program will not necessarily play audio or video, but rather help the user manage a library of related content.
@@ -44,3 +40,7 @@ Unzip the file <br/>
 Run Visual Studio <br/>
 Select "Open a Project or Solution" <br/>
 Select FinalProject.sln within folders <br/>
+
+#### Files
+finalProjectMain.cpp, data.h, baseData.h, baseData.cpp, track.h, track.cpp, audioBook.h, audioBook.cpp, tvEpisode.h, tvEpisode.cpp, 
+README.md, FinalProject.sln, FinalProject.vcxproj, FinalProject.vcxproj.filters, .gitattributes, & .gitignore
