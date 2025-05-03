@@ -4,7 +4,7 @@ tv_episode::tv_episode(const std::string& title,
 	const std::string& show_title,
 	const std::string& creator, int year, 
 	int season_num, int episode_num,
-	double duration, int rating)
+	double duration, double rating)
 	: base_data(title, creator, year, duration) {
 
 	if (show_title.length() > 0) {
@@ -48,7 +48,7 @@ int tv_episode::get_episode_num() const {
 	return episode_num;
 }
 
-int tv_episode::get_rating() const {
+double tv_episode::get_rating() const {
 	return rating;
 }
 

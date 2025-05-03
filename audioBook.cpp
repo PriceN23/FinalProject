@@ -2,10 +2,10 @@
 
 audio_book::audio_book(const std::string& title,
 	const std::string& creator, int year, 
-	double duration, double rating)
+	double duration, bool rating)
 	: base_data(title, creator, year, duration) {
 
-	if (rating >= 0 && rating <= 1) {
+	if (rating == true || rating == false) {
 		this->rating = rating;
 	}
 	else {
@@ -13,7 +13,7 @@ audio_book::audio_book(const std::string& title,
 	}
 }
 
-double audio_book::get_rating() const {
+bool audio_book::get_rating() const {
 	return rating;
 }
 
@@ -22,5 +22,11 @@ void audio_book::print() const {
 		<< " [" << creator
 		<< ", " << year
 		<< "] (" << duration
-		<< " min) " << rating << std::endl;
+		<< " min) ";
+	if (rating == true) {
+		std::cout << "Thumbs up" << std::endl;
+	}
+	else {
+		std::cout << "Thumbs down" << std::endl;
+	}
 }

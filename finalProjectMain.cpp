@@ -77,7 +77,7 @@ std::vector<data*> fill_database(const std::string& path, int length) {
 				double duration = std::stoi(line);
 
 				std::getline(stream, line);
-				double rating = std::stoi(line);
+				bool rating = std::stoi(line);
 
 				database.push_back(new audio_book(title, creator, year, duration, rating));
 			}
@@ -623,13 +623,13 @@ void add_audio_book(std::vector<data*>& database, const std::string& path) {
 	} while (next == false);
 
 	next = false;
-	std::cout << "Thumbs up or thumbs down (type up or down): ";
-	int rating = 0;
+	std::cout << "Rating, type 1 for thumbs up or 0 for thumbs down: ";
+	bool rating = true;
 	do {
 		std::getline(std::cin, line);
 
-		if (line.length() > 0) {
-			rating = 0;				// I need to fix this!
+		if (line.length() > 0 && verify_num(line, false) && (line == "0" || line == "1")) {
+			rating = std::stoi(line);
 			next = true;
 		}
 		else {

@@ -6,7 +6,7 @@ private:
 	std::string show_title;
 	int season_num;
 	int episode_num;
-	int rating;
+	double rating;
 
 public:
 	tv_episode(const std::string& title,
@@ -16,12 +16,12 @@ public:
 		int season_num,
 		int episode_num,
 		double duration,
-		int rating);
+		double rating);
 
 	std::string get_show_title() const;
 	int get_season_num() const;
 	int get_episode_num() const;
-	int get_rating() const;
+	double get_rating() const;
 
 	void print() const override;
 };
