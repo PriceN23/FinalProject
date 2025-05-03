@@ -365,6 +365,10 @@ void sort_lexicographical(std::vector<data*>& database) {
 	sort_successful();
 }
 
+void shuffle(const std::vector<data*>& database) {
+	
+}
+
 void sort_for_csv(std::vector<data*>& database) {
 	//moves all tracks to top of list, followed by moving all audio book after tracks leaving tv episodes at end of list
 	int index = 0;
@@ -433,6 +437,18 @@ void update_csv(std::vector<data*>& database, const std::string& path) {
 	}
 	stream.close();
 	std::cout << "Update Successful" << std::endl << std::endl;
+}
+
+bool verify_title(const std::vector<data*>& database, std::string& title) {
+	for (int i = 0; i < database.size(); i++) {
+		if (base_data* b = dynamic_cast<base_data*>(database[i])) {
+			if (b->get_title() == title) {
+				return true;
+			}
+		}
+	}
+
+	return false;
 }
 
 void add_track(std::vector<data*>& database, const std::string& path) {
@@ -529,10 +545,16 @@ void add_track(std::vector<data*>& database, const std::string& path) {
 			invalid_input();
 		}
 	} while (next == false);
+	
+	bool in_database = verify_title(database, title);
 
-	database.push_back(new track(title, creator, album, year, duration, rating));
-
-	update_csv(database, path);
+	if (in_database == false) {
+		database.push_back(new track(title, creator, album, year, duration, rating));
+		update_csv(database, path);
+	}
+	else {
+		std::cout << std::endl << "Track already in database" << std::endl;
+	}
 }
 
 void add_audio_book(std::vector<data*>& database, const std::string& path) {
@@ -615,9 +637,15 @@ void add_audio_book(std::vector<data*>& database, const std::string& path) {
 		}
 	} while (next == false);
 
-	database.push_back(new audio_book(title, creator, year, duration, rating));
+	bool in_database = verify_title(database, title);
 
-	update_csv(database, path);
+	if (in_database == false) {
+		database.push_back(new audio_book(title, creator, year, duration, rating));
+		update_csv(database, path);
+	}
+	else {
+		std::cout << std::endl << "Audio Book already in database" << std::endl;
+	}
 }
 
 void add_tv_episode(std::vector<data*>& database, const std::string& path) {
@@ -745,9 +773,15 @@ void add_tv_episode(std::vector<data*>& database, const std::string& path) {
 		}
 	} while (next == false);
 
-	database.push_back(new tv_episode(title, show_title, creator, year, season_num, episode_num, duration, rating));
+	bool in_database = verify_title(database, title);
 
-	update_csv(database, path);
+	if (in_database == false) {
+		database.push_back(new tv_episode(title, show_title, creator, year, season_num, episode_num, duration, rating));
+		update_csv(database, path);
+	}
+	else {
+		std::cout << std::endl << "TV Episode already in database" << std::endl;
+	}
 }
 
 int add_entry_prompt() {
@@ -894,7 +928,7 @@ int menu_prompt() {
 		<< "9 Sort all entries by the lexicographical order of their title" << std::endl
 		<< "10 Add new entry to database" << std::endl
 		<< "11 Remove an entry from database" << std::endl
-		<< "12 Yet to be added Stretch Goal" << std::endl
+		<< "12 Print shuffled colleciton of music tracks" << std::endl
 		<< "0 Quit" << std::endl;
 
 	std::cout << "Make a selection: ";
@@ -953,15 +987,22 @@ bool menu(std::vector<data*>& database, const std::string& path) {
 		remove_entry_menu(database, path);
 		return false;
 	case 12:
-		//Yet to be added Stretch Goal
+		shuffle(database);
 		back_to_menu();
-		std::cout << std::endl;
 		return false;
 	case 0:
 		return true;
 	default:
 		return false;
 	}
+}
+
+void starting_message() {
+	std::cout << "Final Project: Default Proposal \nBy: Troy Poniewaz & Nicholas Price" << std::endl << std::endl;
+}
+
+void end_message() {
+	std::cout << "Thank you for using our program, have a great day" << std::endl;
 }
 
 int main() {
@@ -971,6 +1012,8 @@ int main() {
 
 	std::vector<data*> database = fill_database(path, length);
 	
+	starting_message();
+
 	bool quit = false;
 
 	do {
@@ -982,6 +1025,8 @@ int main() {
 	for (int i = 0; i < database.size(); i++) {
 		delete database[i];
 	}
+
+	end_message();
 
 	return 0;
 }

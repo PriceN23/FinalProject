@@ -32,7 +32,7 @@ There must be enough content in the dataset to make viable queries.
 #### Stretch Goals
 1. Allow the user to add a new entry to the database. Also updates the orignal database file. (Nicholas Price)
 2. Allow the user to remove an entry from the database. Also updates the original databse file. (Nicholas Price)
-3. (Troy Poniewaz)
+3. Allow the user to retrieve a ‘shuffled’ collection of all the music tracks in the database. Print this collection out and ensure the order is different every time. (Troy Poniewaz)
 
 ##### How to run
 Download the FinalProject.zip
