@@ -6,7 +6,7 @@ private:
 	std::string show_title;
 	int season_num;
 	int episode_num;
-	int rating; //whole numbers from 1-10
+	int rating;
 
 public:
 	tv_episode(const std::string& title,

@@ -4,7 +4,7 @@
 class track : public base_data {
 private:
 	std::string album;
-	double rating; //decimal values from 0-5
+	double rating;
 
 public:
 	track(const std::string& title,

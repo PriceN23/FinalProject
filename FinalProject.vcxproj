@@ -142,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\database.csv" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

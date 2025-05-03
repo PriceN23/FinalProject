@@ -1,23 +1,11 @@
-/*
-Final Project: Default Proposal
-CompSci 222-01 05/01/2025
-Troy Poniewaz & Nicholas Price
-
-Files: 
-	finalProjectMain.cpp, data.h, data.cpp, track.h, track.cpp, 
-	audioBook.h, audioBook.cpp, tvEpisode.h, tvEpisode.cpp, Data\database.csv
-
-Stretch Goals:
-1. Implemented allowing the user to add a new entry to the database. Also updates the orignal database file.
-2. Implemented allowing the user to remove an entry from the database. Also updates the original databse file.
-3. (Inprogress)
-*/
+// See README for details
 #include "track.h"
 #include "audioBook.h"
 #include "tvEpisode.h"
 #include <fstream>
-#include <algorithm> //we can use this for std::swap in the sort functions
+#include <algorithm>
 #include <vector>
+#include <set>
 
 int get_line_count(const std::string& path) {
 	std::ifstream stream;
@@ -244,9 +232,27 @@ std::string get_input() {
 	return input;
 }
 
+void creators(const std::vector<data*>& database) {
+	std::set<std::string> creators;
+
+	std::cout << std::endl << "List of creators in databse: " << std::endl;
+
+	for (int i = 0; i < database.size(); i++) {
+		if (base_data* d = dynamic_cast<base_data*>(database[i])) {
+			creators.insert(d->get_creator());
+		}
+	}
+
+	for (std::string i : creators) {
+		std::cout << i << std::endl;
+	}
+}
+
 void print_by_creator(const std::vector<data*>& database) {
 	std::string creator = "Unknown";
 	int counter = 0;
+
+	creators(database);
 
 	std::cout << std::endl << "Note: Search is case and space sensitive" << std::endl;
 	std::cout << "Enter creator: ";
@@ -273,7 +279,7 @@ void print_by_creator(const std::vector<data*>& database) {
 		}
 	}
 	if (counter == 0) {
-		std::cout << "Not entries in database match creator: " << creator << std::endl;
+		std::cout << "No entries in database match creator: " << creator << std::endl;
 	}
 	std::cout << std::endl;
 }
@@ -322,6 +328,23 @@ void sort_successful() {
 }
 
 //This would be a good spot to build the sorting functions.
+void sort_by_rating(std::vector<data*>& database) {
+	// Sort by rating in descending order
+
+	sort_successful();
+}
+
+void sort_by_year(std::vector<data*>& database) {
+	// Sort by rating in ascending order
+
+	sort_successful();
+}
+
+void sort_lexicographical(std::vector<data*>& database) {
+	// sort by numberical / alphebetical order (as would be in dictionary)
+
+	sort_successful();
+}
 
 void sort_for_csv(std::vector<data*>& database) {
 	//moves all tracks to top of list, followed by moving all audio book after tracks leaving tv episodes at end of list
@@ -391,22 +414,6 @@ void update_csv(std::vector<data*>& database, const std::string& path) {
 	}
 	stream.close();
 	std::cout << "Update Successful" << std::endl << std::endl;
-}
-
-int add_entry_prompt() {
-	std::cout << std::endl
-		<< "Add entry" << std::endl
-		<< "1 Track" << std::endl
-		<< "2 Audio Book" << std::endl
-		<< "3 TV Episode" << std::endl
-		<< "0 Return to previous menu" << std::endl;
-
-	std::cout << "Make a selection: ";
-
-	int selected = 0;
-	selected = get_input(3);
-
-	return selected;
 }
 
 void add_track(std::vector<data*>& database, const std::string& path) {
@@ -724,6 +731,22 @@ void add_tv_episode(std::vector<data*>& database, const std::string& path) {
 	update_csv(database, path);
 }
 
+int add_entry_prompt() {
+	std::cout << std::endl
+		<< "Add entry" << std::endl
+		<< "1 Track" << std::endl
+		<< "2 Audio Book" << std::endl
+		<< "3 TV Episode" << std::endl
+		<< "0 Return to previous menu" << std::endl;
+
+	std::cout << "Make a selection: ";
+
+	int selected = 0;
+	selected = get_input(3);
+
+	return selected;
+}
+
 void add_entry_menu(std::vector<data*>& database, const std::string& path) {
 	int selected = 0;
 	selected = add_entry_prompt();
@@ -741,6 +764,7 @@ void add_entry_menu(std::vector<data*>& database, const std::string& path) {
 		add_tv_episode(database, path);
 		back_to_menu();
 		break;
+	case 0:
 		//return
 		std::cout << std::endl;
 		break;
@@ -799,7 +823,7 @@ void remove_entry_tv_episode(std::vector<data*>& database, const std::string& pa
 	}
 }
 
-int remove_entry_menu_prompt() {
+int remove_entry_prompt() {
 	std::cout << std::endl
 		<< "Remove Entry Menu" << std::endl
 		<< "1 Remove track" << std::endl
@@ -817,7 +841,7 @@ int remove_entry_menu_prompt() {
 
 void remove_entry_menu(std::vector<data*>& database, const std::string& path) {
 	int selected = 0;
-	selected = remove_entry_menu_prompt();
+	selected = remove_entry_prompt();
 
 	switch (selected) {
 	case 1:
@@ -838,134 +862,26 @@ void remove_entry_menu(std::vector<data*>& database, const std::string& path) {
 	}
 }
 
-int print_menu_prompt() {
-	std::cout << std::endl
-		<< "Print Menu" << std::endl
+int menu_prompt() {
+	std::cout << "Main Menu" << std::endl
 		<< "1 Print all entries in database" << std::endl
 		<< "2 Print all Tracks in database" << std::endl
 		<< "3 Print all Audio Books in database" << std::endl
 		<< "4 Print all TV Episodes in database" << std::endl
 		<< "5 Print all entries with a given creator" << std::endl
 		<< "6 Print all entries released on or after a given year" << std::endl
-		<< "0 Return to previous menu" << std::endl;
-
-	std::cout << "Make a selection: ";
-
-	int selected = 0;
-	selected = get_input(6);
-
-	return selected;
-}
-
-void print_menu(const std::vector<data*>& database) {
-	int selected = 0;
-	selected = print_menu_prompt();
-
-	switch (selected) {
-	case 1:
-		print_database(database);
-		back_to_menu();
-		break;
-	case 2:
-		print_tracks(database);
-		back_to_menu();
-		break;
-	case 3:
-		print_audio_books(database);
-		back_to_menu();
-		break;
-	case 4:
-		print_tv_episodes(database);
-		back_to_menu();
-		break;
-	case 5:
-		print_by_creator(database);
-		back_to_menu();
-		break;
-	case 6:
-		print_by_year(database);
-		back_to_menu();
-		break;
-	case 0:
-		//return 
-		std::cout << std::endl;
-		break;
-	default:
-		break;
-	}
-}
-
-int sort_menu_prompt() {
-	std::cout << std::endl
-		<< "Sort Menu" << std::endl
-		<< "1 Sort all entries by their rating in ascending order" << std::endl
-		<< "2 Sort all entries by their rating in descending order" << std::endl
-		<< "3 Sort all entries in ascending order based on their year" << std::endl
-		<< "4 Sort all entries in descending order based on their year" << std::endl
-		<< "5 Sort all entries by the lexicographical order of their title" << std::endl
-		<< "0 Return to previous menu" << std::endl;
-
-	std::cout << "Make a selection: ";
-
-	int selected = 0;
-	selected = get_input(5);
-
-	return selected;
-}
-
-//menu for sorting functions - call sorting functions here in sort_menu switch statement
-void sort_menu(std::vector<data*>& database) {
-	int selected = 0;
-	selected = sort_menu_prompt();
-
-	switch (selected) {
-	case 1:
-		//Optional: Add "sort all entries by their rating in ascending order" fucntion here
-		sort_successful();
-		back_to_menu();
-		break;
-	case 2:
-		//Needed: Add "sort all entries by their rating in descending order" fucntion here
-		sort_successful();
-		back_to_menu();
-		break;
-	case 3:
-		//Needed: Add "sort all entries in ascending order based on their year" fucntion here
-		sort_successful();
-		back_to_menu();
-		break;
-	case 4:
-		//Optional: Add "sort all entries in descending order based on their year" fucntion here
-		sort_successful();
-		back_to_menu();
-		break;
-	case 5:
-		//Needed: Add "sort all entries by the lexicographical order of their title" fucntion here
-		sort_successful();
-		back_to_menu();
-		break;
-	case 0:
-		//return
-		std::cout << std::endl;
-		break;
-	default:
-		break;
-	}
-}
-
-int menu_prompt() {
-	std::cout << "Main Menu" << std::endl
-		<< "1 Print options" << std::endl
-		<< "2 Sort options" << std::endl
-		<< "3 Add new entry to database" << std::endl
-		<< "4 Remove an entry from database" << std::endl
-		<< "5 Yet to be added Stretch Goal" << std::endl
+		<< "7 Sort all entries by their rating in descending order" << std::endl
+		<< "8 Sort all entries in ascending order based on their year" << std::endl
+		<< "9 Sort all entries by the lexicographical order of their title" << std::endl
+		<< "10 Add new entry to database" << std::endl
+		<< "11 Remove an entry from database" << std::endl
+		<< "12 Yet to be added Stretch Goal" << std::endl
 		<< "0 Quit" << std::endl;
 
 	std::cout << "Make a selection: ";
 
 	int selected = 0;
-	selected = get_input(5);
+	selected = get_input(12);
 
 	return selected;
 }
@@ -976,19 +892,51 @@ bool menu(std::vector<data*>& database, const std::string& path) {
 
 	switch (selected) {
 	case 1:
-		print_menu(database);
+		print_database(database);
+		back_to_menu();
 		return false;
 	case 2:
-		sort_menu(database);
+		print_tracks(database);
+		back_to_menu();
 		return false;
 	case 3:
-		add_entry_menu(database, path);
+		print_audio_books(database);
+		back_to_menu();
 		return false;
 	case 4:
-		remove_entry_menu(database, path);
+		print_tv_episodes(database);
+		back_to_menu();
 		return false;
 	case 5:
+		print_by_creator(database);
+		back_to_menu();
+		return false;
+	case 6:
+		print_by_year(database);
+		back_to_menu();
+		return false;
+	case 7:
+		sort_by_rating(database);
+		back_to_menu();
+		return false;
+	case 8:
+		sort_by_year(database);
+		back_to_menu();
+		return false;
+	case 9:
+		sort_lexicographical(database);
+		back_to_menu();
+		return false;
+	case 10:
+		add_entry_menu(database, path);
+		return false;
+	case 11:
+		remove_entry_menu(database, path);
+		return false;
+	case 12:
 		//Yet to be added Stretch Goal
+		back_to_menu();
+		std::cout << std::endl;
 		return false;
 	case 0:
 		return true;
@@ -1010,7 +958,7 @@ int main() {
 		quit = menu(database, path);
 	} while (quit == false);
 
-	update_csv(database, path); //There are 5 others of this function
+	update_csv(database, path);
 
 	for (int i = 0; i < database.size(); i++) {
 		delete database[i];
