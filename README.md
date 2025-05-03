@@ -14,7 +14,7 @@ There must be enough content in the dataset to make viable queries.
 2. At least two of each type of item (Track, Audio Book, TV Episode) should have the same creator. (Troy Poniewaz & Nicholas Price)
 3. At least 4 different creators are represented for each type of item. (Troy Poniewaz & Nicholas Price)
 4. Database correctly reads into the program from an external file and data is parsed into the most appropriate type for each field. (Nicholas Price)
-5. Menu functionality. (Nicholas Price)
+5. Menu functionality.
 	1. Print out all entries in the database. (Nicholas Price)
 	2. Print out only the Tracks. (Nicholas Price)
 	3. Print out only the Audio Books. (Nicholas Price)
@@ -24,7 +24,7 @@ There must be enough content in the dataset to make viable queries.
 	7. Sort all entries in ascending order based on their year. (Troy Poniewaz)
 	8. Sort all entries by the lexicographical order of their title. (Troy Poniewaz)
 	9. Print out all entries released on or after a given year. (Nicholas Price)
-	10. Quit funcitonality. (Nicholas Price)
+	10. Quit.
 6. Program loops until the user selects the quit option from the main menu. (Nicholas Price)
 7. Entire program compiles and runs as expected to completion without any unhandled exceptions. (Troy Poniewaz & Nicholas Price)
 8. Protection against a malicious user attempting to break the program. (Troy Poniewaz & Nicholas Price)
