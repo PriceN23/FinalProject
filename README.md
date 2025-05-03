@@ -3,6 +3,10 @@ Troy Poniewaz & Nicholas Price <br/>
 CompSci 222-01 <br/>
 05/07/2025 <br/>
 
+#### Files
+finalProjectMain.cpp, data.h, baseData.h, baseData.cpp, track.h, track.cpp, audioBook.h, audioBook.cpp, tvEpisode.h, tvEpisode.cpp, 
+README.md, FinalProject.sln, FinalProject.vcxproj, FinalProject.vcxproj.filters, .gitattributes, & .gitignore
+
 ### Description
 A program similar to multimedia players such as iTunes, Spotify, etc.
 The program will not necessarily play audio or video, but rather help the user manage a library of related content.
@@ -34,7 +38,7 @@ There must be enough content in the dataset to make viable queries.
 2. Allow the user to remove an entry from the database. Also updates the original databse file. (Nicholas Price)
 3. Allow the user to retrieve a ‘shuffled’ collection of all the music tracks in the database. Print this collection out and ensure the order is different every time. (Troy Poniewaz)
 
-### How to run
+## How to run
 Download the FinalProject.zip <br/>
 Unzip the file <br/>
 Run Visual Studio <br/>
