@@ -346,6 +346,23 @@ void sort_successful() {
 	std::cout << std::endl << "Sort successful" << std::endl;
 }
 
+void sort_for_csv(std::vector<data*>& database) {
+	//moves all tracks to top of list, followed by moving all audio book after tracks leaving tv episodes at end of list
+	int index = 0;
+	for (int i = 0; i < database.size(); i++) {
+		if (track* e = dynamic_cast<track*>(database[i])) {
+			std::swap(database[i], database[index]);
+			index++;
+		}
+	}
+	for (int i = index; i < database.size(); i++) {
+		if (audio_book* e = dynamic_cast<audio_book*>(database[i])) {
+			std::swap(database[i], database[index]);
+			index++;
+		}
+	}
+}
+
 //This would be a good spot to build the sorting functions.
 void sort_by_rating(std::vector<data*>& database) {
 	// Sort by rating in descending order
@@ -367,23 +384,6 @@ void sort_lexicographical(std::vector<data*>& database) {
 
 void shuffle(const std::vector<data*>& database) {
 	
-}
-
-void sort_for_csv(std::vector<data*>& database) {
-	//moves all tracks to top of list, followed by moving all audio book after tracks leaving tv episodes at end of list
-	int index = 0;
-	for (int i = 0; i < database.size(); i++) {
-		if (track* e = dynamic_cast<track*>(database[i])) {
-			std::swap(database[i], database[index]);
-			index++;
-		}
-	}
-	for (int i = index; i < database.size(); i++) {
-		if (audio_book* e = dynamic_cast<audio_book*>(database[i])) {
-			std::swap(database[i], database[index]);
-			index++;
-		}
-	}
 }
 
 void update_csv(std::vector<data*>& database, const std::string& path) {
