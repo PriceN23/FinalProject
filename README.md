@@ -3,13 +3,13 @@ Troy Poniewaz & Nicholas Price <br/>
 CompSci 222-01 <br/>
 05/07/2025 <br/>
 
-## Description
+### Description
 A program similar to multimedia players such as iTunes, Spotify, etc.
 The program will not necessarily play audio or video, but rather help the user manage a library of related content.
 The content can be based on real media or entirely fictional.
 There must be enough content in the dataset to make viable queries.
 
-### Minimum Viable Product
+## Minimum Viable Product
 1. Create a single database file which includes entries for at least 8 tracks, 8 audio books, and 8 TV episodes. (Troy Poniewaz & Nicholas Price)
 2. At least two of each type of item (Track, Audio Book, TV Episode) should have the same creator. (Troy Poniewaz & Nicholas Price)
 3. At least 4 different creators are represented for each type of item. (Troy Poniewaz & Nicholas Price)
@@ -29,12 +29,12 @@ There must be enough content in the dataset to make viable queries.
 7. Entire program compiles and runs as expected to completion without any unhandled exceptions. (Troy Poniewaz & Nicholas Price)
 8. Protection against a malicious user attempting to break the program. (Troy Poniewaz & Nicholas Price)
 
-#### Stretch Goals
+## Stretch Goals
 1. Allow the user to add a new entry to the database. Also updates the orignal database file. (Nicholas Price)
 2. Allow the user to remove an entry from the database. Also updates the original databse file. (Nicholas Price)
 3. Allow the user to retrieve a ‘shuffled’ collection of all the music tracks in the database. Print this collection out and ensure the order is different every time. (Troy Poniewaz)
 
-##### How to run
+### How to run
 Download the FinalProject.zip <br/>
 Unzip the file <br/>
 Run Visual Studio <br/>
