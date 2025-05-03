@@ -254,7 +254,7 @@ void print_by_creator(const std::vector<data*>& database) {
 
 	creators(database);
 
-	std::cout << std::endl << "Note: Search is case and space sensitive" << std::endl;
+	std::cout << "Note: Search is case and space sensitive" << std::endl;
 	std::cout << "Enter creator: ";
 
 	creator = get_input();
@@ -284,10 +284,29 @@ void print_by_creator(const std::vector<data*>& database) {
 	std::cout << std::endl;
 }
 
+void years(const std::vector<data*>& database) {
+	int dates[2] = {1991, 1991};
+
+	for (int i = 0; i < database.size(); i++) {
+		if (base_data* d = dynamic_cast<base_data*>(database[i])) {
+			if (d->get_year() < dates[0]) {
+				dates[0] = d->get_year();
+			}
+			if (d->get_year() > dates[1]) {
+				dates[1] = d->get_year();
+			}
+		}
+	}
+
+	std::cout << std::endl << "Oldest entry: " << dates[0] << " Newest entry: " << dates[1] << std::endl;
+}
+
 void print_by_year(const std::vector<data*>& database) {
 	int year = 0, counter = 0;
 
-	std::cout << std::endl << "Note: Space sensitive" << std::endl;
+	years(database);
+
+	std::cout << "Note: Space sensitive" << std::endl;
 	std::cout << "Enter year: ";
 
 	year = get_input(2025);
