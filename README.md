@@ -1,7 +1,7 @@
 # Final Project: Default Proposal
-Troy Poniewaz & Nicholas Price
-CompSci 222-01 
-05/07/2025
+Troy Poniewaz & Nicholas Price <br/>
+CompSci 222-01 <br/>
+05/07/2025 <br/>
 
 ## Description
 A program similar to multimedia players such as iTunes, Spotify, etc.
@@ -35,8 +35,8 @@ There must be enough content in the dataset to make viable queries.
 3. Allow the user to retrieve a ‘shuffled’ collection of all the music tracks in the database. Print this collection out and ensure the order is different every time. (Troy Poniewaz)
 
 ##### How to run
-Download the FinalProject.zip
-Unzip the file
-Run Visual Studio
-Select "Open a Project or Solution"
-Select FinalProject.sln within folders
+Download the FinalProject.zip <br/>
+Unzip the file <br/>
+Run Visual Studio <br/>
+Select "Open a Project or Solution" <br/>
+Select FinalProject.sln within folders <br/>
