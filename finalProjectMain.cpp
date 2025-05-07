@@ -1071,7 +1071,7 @@ bool menu(std::vector<data*>& database, const std::string& path) {
 }
 
 void starting_message() {
-	std::cout << "Final Project: Default Proposal \nBy: Troy Poniewaz & Nicholas Price" << std::endl << std::endl;
+	std::cout << "Final Project: Default Proposal \nBy: Nicholas Price & Troy Poniewaz" << std::endl << std::endl;
 }
 
 void end_message() {
