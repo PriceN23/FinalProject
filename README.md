@@ -1,5 +1,5 @@
 # Final Project: Default Proposal
-Troy Poniewaz & Nicholas Price <br/>
+Nicholas Price & Troy Poniewaz <br/>
 CompSci 222-01 <br/>
 05/07/2025 <br/>
 
@@ -10,29 +10,29 @@ The content can be based on real media or entirely fictional.
 There must be enough content in the dataset to make viable queries.
 
 ## Minimum Viable Product
-1. Create a single database file which includes entries for at least 8 tracks, 8 audio books, and 8 TV episodes. (Troy Poniewaz & Nicholas Price)
-2. At least two of each type of item (Track, Audio Book, TV Episode) should have the same creator. (Troy Poniewaz & Nicholas Price)
-3. At least 4 different creators are represented for each type of item. (Troy Poniewaz & Nicholas Price)
+1. Create a single database file which includes entries for at least 8 tracks, 8 audio books, and 8 TV episodes. (Nicholas Price)
+2. At least two of each type of item (Track, Audio Book, TV Episode) should have the same creator. (Nicholas Price)
+3. At least 4 different creators are represented for each type of item. (Nicholas Price)
 4. Database correctly reads into the program from an external file and data is parsed into the most appropriate type for each field. (Nicholas Price)
 5. Menu functionality.
 	1. Print out all entries in the database. (Nicholas Price)
 	2. Print out only the Tracks. (Nicholas Price)
 	3. Print out only the Audio Books. (Nicholas Price)
 	4. Print out only the TV Episodes. (Nicholas Price)
-	5. Print out all entries with a given creator. (Nicholas Price)
-	6. Sort all entries by their rating in descending order. (Troy Poniewaz)
-	7. Sort all entries in ascending order based on their year. (Troy Poniewaz)
+	5. Print out all entries with a given creator. (Assigned to Troy Poniewaz, completed by Nicholas Price)
+	6. Sort all entries by their rating in descending order. (Assigned to Troy Poniewaz, completed by Nicholas Price)
+	7. Sort all entries in ascending order based on their year. (Assigned to Troy Poniewaz, completed by Nicholas Price)
 	8. Sort all entries by the lexicographical order of their title. (Troy Poniewaz)
 	9. Print out all entries released on or after a given year. (Nicholas Price)
 	10. Quit.
 6. Program loops until the user selects the quit option from the main menu. (Nicholas Price)
-7. Entire program compiles and runs as expected to completion without any unhandled exceptions. (Troy Poniewaz & Nicholas Price)
-8. Protection against a malicious user attempting to break the program. (Troy Poniewaz & Nicholas Price)
+7. Entire program compiles and runs as expected to completion without any unhandled exceptions. (Nicholas Price)
+8. Protection against a malicious user attempting to break the program. (Nicholas Price)
 
 ## Stretch Goals
 1. Allow the user to add a new entry to the database. Also updates the orignal database file. (Nicholas Price)
 2. Allow the user to remove an entry from the database. Also updates the original databse file. (Nicholas Price)
-3. Allow the user to retrieve a ‘shuffled’ collection of all the music tracks in the database. Print this collection out and ensure the order is different every time. (Troy Poniewaz)
+3. Allow the user to retrieve a ‘shuffled’ collection of all the music tracks in the database. Print this collection out and ensure the order is different every time. (Assigned to Troy Poniewaz, completed by Nicholas Price)
 
 ## How to run
 Download the FinalProject.zip <br/>

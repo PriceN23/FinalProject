@@ -285,7 +285,7 @@ void print_by_creator(const std::vector<data*>& database) {
 }
 
 void years(const std::vector<data*>& database) {
-	int dates[2] = {1991, 1991};
+	int dates[2] = { 1991, 1991 };
 
 	for (int i = 0; i < database.size(); i++) {
 		if (base_data* d = dynamic_cast<base_data*>(database[i])) {
@@ -363,27 +363,100 @@ void sort_for_csv(std::vector<data*>& database) {
 	}
 }
 
-//This would be a good spot to build the sorting functions.
 void sort_by_rating(std::vector<data*>& database) {
 	// Sort by rating in descending order
+	sort_for_csv(database);
+
+	for (int i = 0; i < database.size() - 1; i++) {
+		for (int j = i; j < database.size(); j++){
+			if (track* t1 = dynamic_cast<track*>(database[i])) {
+				if (track* t2 = dynamic_cast<track*>(database[j])) {
+					if (t1->get_rating() < t2->get_rating()) {
+						std::swap(database[i], database[j]);
+					}
+				}
+			}
+			else if (audio_book* b1 = dynamic_cast<audio_book*>(database[i])) {
+				if (audio_book* b2 = dynamic_cast<audio_book*>(database[j])) {
+					if (b1->get_rating() < b2->get_rating()) {
+						std::swap(database[i], database[j]);
+					}
+				}
+			}
+			else if (tv_episode* e1 = dynamic_cast<tv_episode*>(database[i])) {
+				if (tv_episode* e2 = dynamic_cast<tv_episode*>(database[j])) {
+					if (e1->get_rating() < e2->get_rating()) {
+						std::swap(database[i], database[j]);
+					}
+				}
+			}
+		}
+	}
 
 	sort_successful();
 }
 
 void sort_by_year(std::vector<data*>& database) {
 	// Sort by rating in ascending order
+	for (int i = 0; i < database.size() - 1; i++) {
+		for (int j = i; j < database.size(); j++) {
+			if (base_data* d1 = dynamic_cast<base_data*>(database[i])) {
+				if (base_data* d2 = dynamic_cast<base_data*>(database[j])) {
+					if (d1->get_year() > d2->get_year()) {
+						std::swap(database[i], database[j]);
+					}
+				}
+			}
+		}
+	}
 
 	sort_successful();
 }
 
 void sort_lexicographical(std::vector<data*>& database) {
 	// sort by numberical / alphebetical order (as would be in dictionary)
+	std::set<std::string> lexi_sort;
+
+	for (int i = 0; i < database.size(); i++) {
+		if (base_data* d = dynamic_cast<base_data*>(database[i])) {
+			lexi_sort.insert(d->get_title());
+		}
+	}
+
+	for (int i = 0; i < database.size() - 1; i++) {
+		for (int j = i; j < database.size(); j++) {
+			for (const std::string index : lexi_sort) {
+				if (base_data* d = dynamic_cast<base_data*>(database[i])) {
+					if (d->get_title() == index) {
+						std::swap(database[i], database[j]);
+					}
+				}
+			}
+		}
+	}
 
 	sort_successful();
 }
 
 void shuffle(const std::vector<data*>& database) {
-	
+	std::vector<data*> shuffled;
+
+	for (int i = 0; i < database.size(); i++) {
+		if (track* t = dynamic_cast<track*>(database[i])) {
+			shuffled.push_back(database[i]);
+		}
+	}
+
+	std::random_shuffle(shuffled.begin(), shuffled.end());
+
+	std::cout << std::endl << "Shuffled tracks: " << std::endl;
+
+	for (int i = 0; i < shuffled.size(); i++) {
+		if (track* t = dynamic_cast<track*>(shuffled[i])) {
+			t->print();
+		}
+	}
+	std::cout << std::endl;
 }
 
 void update_csv(std::vector<data*>& database, const std::string& path) {
